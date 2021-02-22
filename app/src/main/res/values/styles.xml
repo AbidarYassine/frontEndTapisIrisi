@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="connexion">
+
+    <item name="android:textSize">
+        50sp
+    </item>
+
+    <item name="android:textColor">
+        #4F80D8
+    </item>
+
+</style>
+    <style name="login">
+
+        <item name="android:textSize">
+            20sp
+        </item>
+
+        <item name="android:textColor">
+            #00114B
+        </item>
+
+    </style>
+
+    <style name="profile_login">
+
+        <item name="android:textSize">
+            36sp
+        </item>
+
+        <item name="android:textColor">
+            #4F80D8
+        </item>
+
+    </style>
+</resources>

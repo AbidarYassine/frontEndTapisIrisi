@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/vector"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/ic_wave__1_" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="41dp"
+        android:text="Motifs"
+        android:textColor="#999E9D"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/motifDetailsImageView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/vector"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="12dp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/ic_launcher_background" />
+
+</RelativeLayout>
