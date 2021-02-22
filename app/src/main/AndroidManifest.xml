@@ -52,6 +52,7 @@
         <activity android:name=".activities.utilUiOpenCv.HistoriqueListActivity" />
         <activity android:name=".activities.Register.Register" />
         <activity android:name=".activities.Admin.Admin" />
+        <activity android:name=".activities.Main.MainActivity" />
         <activity android:name=".activities.Admin.Ajouter" />
         <activity android:name=".activities.Admin.Modifier" />
         <activity android:name=".activities.Login.Login">

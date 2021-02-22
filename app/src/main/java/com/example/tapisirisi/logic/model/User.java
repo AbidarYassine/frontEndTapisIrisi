@@ -13,10 +13,10 @@ public class User implements Serializable {
     private String login;
     private String password;
     private Role role;
-    private Blob profile_image;
+    private byte[] profile_image;
     private List<Motif> motifs;
 
-    public User(Long id, String nom, String prenom, String login, String password, Role role, Blob profile_image, List<Motif> motifs) {
+    public User(Long id, String nom, String prenom, String login, String password, Role role, byte[] profile_image, List<Motif> motifs) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -33,6 +33,17 @@ public class User implements Serializable {
 
     }
 
+    public User(Long id, String nom, String prenom, String login, String password, Role role, byte[] profile_image) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+        this.profile_image = profile_image;
+    }
+
+    public User() { }
 
 
     public Long getId() {
@@ -59,7 +70,7 @@ public class User implements Serializable {
         return role;
     }
 
-    public Blob getProfile_image() {
+    public byte[] getProfile_image() {
         return profile_image;
     }
 
@@ -91,7 +102,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public void setProfile_image(Blob profile_image) {
+    public void setProfile_image(byte[] profile_image) {
         this.profile_image = profile_image;
     }
 

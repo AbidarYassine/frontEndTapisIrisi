@@ -10,6 +10,7 @@ import android.view.Window;
 import com.example.tapisirisi.Services.UserService;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
+import com.example.tapisirisi.database.DatabaseHelper;
 import com.example.tapisirisi.logic.model.User;
 
 import java.util.List;
@@ -97,6 +98,7 @@ public class UserServiceImpl {
 
     public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent, Context context) {
         getClient();
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
         Log.i("info", "//////////////////////");
         Call<User> call = userService.login(login, password);
         final User[] fetchedUser = new User[1];
@@ -116,6 +118,9 @@ public class UserServiceImpl {
                         popup.setContent("Utilisateur Inexistant");
                         popup.build();
                     } else {
+                       // context.startActivity(intent);
+                        spinner.dismiss();
+                       // databaseHelper.insertUser(fetchedUser[0]);
                         context.startActivity(intent);
                     }
 
