@@ -1,14 +1,9 @@
 package com.example.tapisirisi.activities.Admin;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.tapisirisi.R;
-import com.example.tapisirisi.activities.ui.HistoriqueListActivity;
-import com.example.tapisirisi.activities.ui.HistoriqueMotifDetailsActivity;
 import com.example.tapisirisi.logic.adapter.admin_list_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.tapisirisi;
+package com.example.tapisirisi.activities.utilUiOpenCv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.example.tapisirisi.OpenCVOverlayView;
 import com.example.tapisirisi.R;
 
 import org.opencv.android.BaseLoaderCallback;

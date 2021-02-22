@@ -6,16 +6,12 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.example.tapisirisi.Services.UserService;
-import com.example.tapisirisi.activities.Main.MainActivity;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
 import com.example.tapisirisi.logic.model.User;
-import com.example.tapisirisi.utils.Consts;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
 import retrofit2.Call;
@@ -97,7 +93,6 @@ public class UserServiceImpl {
         });
         return fetchedUser[0];
     }
-
     public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent,Context context) {
         getClient();
         Log.i("info","//////////////////////");

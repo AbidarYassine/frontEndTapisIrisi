@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.logic.model.Motif;
-import com.example.tapisirisi.activities.ui.HistoriqueMotifDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;

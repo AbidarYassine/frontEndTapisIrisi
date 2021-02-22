@@ -1,4 +1,4 @@
-package com.example.tapisirisi;
+package com.example.tapisirisi.activities.utilUiOpenCv;
 
 import android.content.Context;
 import android.graphics.Canvas;

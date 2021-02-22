@@ -1,4 +1,4 @@
-package com.example.tapisirisi.activities.ui;
+package com.example.tapisirisi.activities.utilUiOpenCv;
 
 import android.content.Intent;
 import android.os.Bundle;
