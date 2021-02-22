@@ -2,10 +2,11 @@ package com.example.tapisirisi.logic.model;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private Long id;
     private String nom;
     private String prenom;

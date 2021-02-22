@@ -1,4 +1,4 @@
- package com.example.tapisirisi.ServiceImpl;
+package com.example.tapisirisi.ServiceImpl;
 
 import android.app.ActionBar;
 import android.content.Context;
@@ -34,7 +34,7 @@ public class UserServiceImpl {
 
     public static void getUsers() {
         getClient();
-        Log.i("info","/////////////////////////");
+        Log.i("info", "/////////////////////////");
         Call<List> call = userService.getUsers();
         call.enqueue(new Callback<List>() {
             @Override
@@ -55,7 +55,8 @@ public class UserServiceImpl {
             }
         });
     }
-    public static User register(User user, CustomSpinner spinner, CustomPopup popup,Context context) {
+
+    public static User register(User user, CustomSpinner spinner, CustomPopup popup, Context context) {
         getClient();
         Call<User> call = userService.register(user);
         final User[] fetchedUser = new User[1];
@@ -67,15 +68,15 @@ public class UserServiceImpl {
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     spinner.dismiss();
                     fetchedUser[0] = response.body();
-                    if(fetchedUser[0].getLogin() == null){
+                    if (fetchedUser[0].getLogin() == null) {
                         popup.setTitle("Erreur");
                         popup.setContent("Utilisateur déjà existant");
                         popup.build();
-                    }else{
-                     // rediriger vers l'espace utilisateur
+                    } else {
+                        // rediriger vers l'espace utilisateur
                     }
 
 
@@ -93,9 +94,10 @@ public class UserServiceImpl {
         });
         return fetchedUser[0];
     }
-    public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent,Context context) {
+
+    public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent, Context context) {
         getClient();
-        Log.i("info","//////////////////////");
+        Log.i("info", "//////////////////////");
         Call<User> call = userService.login(login, password);
         final User[] fetchedUser = new User[1];
         spinner.show();
@@ -109,11 +111,11 @@ public class UserServiceImpl {
                 if (response.isSuccessful()) {
                     spinner.dismiss();
                     fetchedUser[0] = response.body();
-                    if(fetchedUser[0].getLogin() == null){
+                    if (fetchedUser[0].getLogin() == null) {
                         popup.setTitle("Erreur");
                         popup.setContent("Utilisateur Inexistant");
                         popup.build();
-                    }else{
+                    } else {
                         context.startActivity(intent);
                     }
 

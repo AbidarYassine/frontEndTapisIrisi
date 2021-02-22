@@ -1,20 +1,27 @@
 package com.example.tapisirisi.logic.model;
 
-public class Propriete {
+import java.io.Serializable;
+
+public class Propriete implements Serializable {
     private long id;
     private String libelle;
     private String description;
+    private Motif motif;
+
     public Propriete() {
-    }
-    public Propriete(String description, String libelle) {
-        this.description = description;
-        this.libelle = libelle;
     }
 
     public Propriete(long id, String description, String libelle) {
         this.id = id;
         this.description = description;
         this.libelle = libelle;
+    }
+
+    public Propriete(long id, String libelle, String description, Motif motif) {
+        this.id = id;
+        this.libelle = libelle;
+        this.description = description;
+        this.motif = motif;
     }
 
     public long getId() {
@@ -39,6 +46,14 @@ public class Propriete {
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public Motif getMotif() {
+        return motif;
+    }
+
+    public void setMotif(Motif motif) {
+        this.motif = motif;
     }
 }
 

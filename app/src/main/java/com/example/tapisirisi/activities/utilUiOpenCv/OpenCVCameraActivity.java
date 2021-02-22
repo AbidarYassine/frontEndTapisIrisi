@@ -1,10 +1,12 @@
 package com.example.tapisirisi.activities.utilUiOpenCv;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ActivityManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -12,7 +14,10 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.tapisirisi.R;
+import com.example.tapisirisi.ServiceImpl.MotifServiceImpl;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -28,12 +33,21 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OpenCVCameraActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     private static final String TAG = OpenCVCameraActivity.class.getName();
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    public static final int MEDIA_TYPE_VIDEO = 2;
     private static final boolean LOG_MEM_USAGE = true;
     private static final boolean DETECT_RED_OBJECTS_ONLY = false;
     private static final Scalar HSV_LOW_RED1 = new Scalar(0, 100, 100);
@@ -173,7 +187,6 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
             gray = inputFrame.gray();
         }
 
-
         // the image to output on the screen in the end
         // -> get the unchanged color image
         Mat dst = inputFrame.rgba();
@@ -185,9 +198,6 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
         if (DETECT_RED_OBJECTS_ONLY) {
             // convert the image from RGBA to HSV
             Imgproc.cvtColor(upscaled, hsv, Imgproc.COLOR_RGB2HSV);
-
-            /// ha fin hbsst
-            Bitmap bitmap = Bitmap.createBitmap(gray.cols(), gray.rows(), Bitmap.Config.ARGB_8888);
 
             // threshold the image for the lower and upper HSV red range
             Core.inRange(hsv, HSV_LOW_RED1, HSV_LOW_RED2, lowerRedRange);
@@ -239,12 +249,11 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
             Log.d(TAG, "vertices:" + numberVertices);
 
             // ignore to small areas
-            if (Math.abs(contourArea) < 100
-                // || !Imgproc.isContourConvex(
-            ) {
+            if (Math.abs(contourArea) < 100) {
                 continue;
             }
         }
+        getResult(gray);
         // return the matrix / image to show on the screen
         return dst;
 
@@ -285,18 +294,7 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
                 r.x + ((r.width - text.width) / 2),
                 r.y + ((r.height + text.height) / 2)
         );
-        /*
-        Imgproc.rectangle(
-                im,
-                new Point(r.x + 0, r.y + baseline[0]),
-                new Point(r.x + text.width, r.y -text.height),
-                new Scalar(255,255,255),
-                -1
-                );
-        */
-
         Imgproc.putText(im, label, pt, fontface, scale, RGB_RED, thickness);
-
     }
 
     /**
@@ -316,5 +314,70 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
                 overlayView.changeCanvas(command);
             }
         });
+    }
+
+    private void getResult(Mat mat) {
+        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] bytes = stream.toByteArray();
+        File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+        Log.i(TAG, "onCameraFrame: " + pictureFile.toString());
+        try {
+            FileOutputStream fos = new FileOutputStream(pictureFile);
+            fos.write(bytes);
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(OpenCVCameraActivity.this, MotifServiceImpl.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("picture", (Serializable) pictureFile);
+        intent.putExtras(bundle);
+        startService(intent);
+    }
+
+    /**
+     * Create a file Uri for saving an image or video
+     */
+    private static Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    /**
+     * Create a File for saving an image or video
+     */
+    public static File getOutputMediaFile(int type) {
+        // To be safe, you should check that the SDCard is mounted
+        // using Environment.getExternalStorageState() before doing this.
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "MyCameraApp");
+        // This location works best if you want the created images to be shared
+        // between applications and persist after your app has been uninstalled.
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("MyCameraApp", "failed to create directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                    "VID_" + timeStamp + ".mp4");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
     }
 }

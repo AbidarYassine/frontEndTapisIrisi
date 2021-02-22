@@ -1,21 +1,19 @@
 package com.example.tapisirisi.activities.Login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tapisirisi.R;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tapisirisi.R;
 import com.example.tapisirisi.ServiceImpl.UserServiceImpl;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
 import com.example.tapisirisi.activities.Register.Register;
-import com.example.tapisirisi.logic.model.User;
+import com.example.tapisirisi.activities.utilUiOpenCv.CameraStartupActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class Login extends AppCompatActivity {
@@ -58,6 +56,9 @@ public class Login extends AppCompatActivity {
                 UserServiceImpl.login(loginValue, passwordValue, spinner, popup, intent, this);
             }
         });
+
+        Intent intent1 = new Intent(Login.this, CameraStartupActivity.class);
+        startActivity(intent1);
     }
 
     public void showPopup(String title, String content) {

@@ -5,10 +5,10 @@
 5    android:versionName="3.4.13" >
 6
 7    <uses-sdk
-7-->C:\Users\yassine\Desktop\IRISI\IRISI_semester3\mobile\projetRakrak\tapisFrontEndApp\tapis_project_v0\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
+7-->C:\Users\Lenovo\Documents\Android Projects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
 8        android:minSdkVersion="8"
-8-->C:\Users\yassine\Desktop\IRISI\IRISI_semester3\mobile\projetRakrak\tapisFrontEndApp\tapis_project_v0\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
+8-->C:\Users\Lenovo\Documents\Android Projects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
 9        android:targetSdkVersion="29" />
-9-->C:\Users\yassine\Desktop\IRISI\IRISI_semester3\mobile\projetRakrak\tapisFrontEndApp\tapis_project_v0\openCVLibrary3413\src\main\AndroidManifest.xml:7:15-44
+9-->C:\Users\Lenovo\Documents\Android Projects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:15-44
 10
 11</manifest>

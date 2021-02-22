@@ -2,15 +2,18 @@ package com.example.tapisirisi.ServiceImpl;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.tapisirisi.Services.UserMotifService;
+import com.example.tapisirisi.activities.Admin.Admin;
 import com.example.tapisirisi.logic.model.UserMotif;
 import com.example.tapisirisi.utils.Consts;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +23,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserMotifSerice extends Service {
+public class UserMotifServiceImpl extends Service {
     private static final String TAG = "UserMotifSerice";
     static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(Consts.API)
@@ -28,7 +31,7 @@ public class UserMotifSerice extends Service {
             .build();
     static private UserMotifService userMotifService = retrofit.create(UserMotifService.class);
 
-    public static List<UserMotif> getAllUserMotif() {
+    public void getAllUserMotifs() {
         Call<List<UserMotif>> call = userMotifService.getAllUserMotif();
         final List<UserMotif> fetchedUserMotif = new ArrayList<UserMotif>();
         call.enqueue(new Callback<List<UserMotif>>() {
@@ -36,8 +39,14 @@ public class UserMotifSerice extends Service {
             public void onResponse(Call<List<UserMotif>> call, Response<List<UserMotif>> response) {
                 Log.i(TAG, "getAllUserMotif: " + response.body());
                 if (response.isSuccessful()) {
-                    fetchedUserMotif.addAll(response.body());
-                    Log.i("TAGinfo", response.body().get(0).getFileDownloadUri());
+                    List userMotifs = response.body();
+                    fetchedUserMotif.addAll(userMotifs);
+                    Intent intent = new Intent(getApplicationContext(), Admin.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("value", (Serializable) fetchedUserMotif);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 } else {
                     Log.d("Yo", "Boo!");
                 }
@@ -48,7 +57,7 @@ public class UserMotifSerice extends Service {
                 Log.i("TAGerr", t.getMessage());
             }
         });
-        return fetchedUserMotif;
+
     }
 
     @Nullable
@@ -59,9 +68,10 @@ public class UserMotifSerice extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        getAllUserMotif();
+        getAllUserMotifs();
         return START_NOT_STICKY;
     }
+
     public void talk() {
         Intent i = new Intent();
 //        i.putExtras("usermotifs", getAllUserMotif());

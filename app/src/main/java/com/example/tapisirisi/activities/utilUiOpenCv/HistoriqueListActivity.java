@@ -20,9 +20,9 @@ public class HistoriqueListActivity extends AppCompatActivity {
     private ListView historiqueListView;
 
     private static List<Motif> motifs = new ArrayList<Motif>() {{
-        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
-        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
-        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));
+//        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
+//        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
+//        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));
     }};
 
     @Override
@@ -43,7 +43,6 @@ public class HistoriqueListActivity extends AppCompatActivity {
                 Motif selectedMotif = motifs.get(position);
                 intent.putExtra("element_id", selectedMotif.getId());
                 intent.putExtra("element_libelle", selectedMotif.getLibelle());
-                intent.putExtra("element_drawable", selectedMotif.getDrawable());
                 startActivity(intent);
             }
         });

@@ -1,6 +1,8 @@
 package com.example.tapisirisi.activities.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.tapisirisi.R;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.tapisirisi.logic.model.Motif;
+import com.example.tapisirisi.logic.model.UserMotif;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +22,9 @@ public class Admin extends AppCompatActivity {
     private ListView lv;
 
     private static List<Motif> motifs = new ArrayList<Motif>() {{
-        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
-        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
-        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));
+//        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
+//        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
+//        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));
     }};
 
     //int images[] = {R.drawable.ic_launcher_background, R.drawable.ic_launcher_background,R.drawable.ic_launcher_background,R.drawable.ic_launcher_background};
@@ -33,13 +36,17 @@ public class Admin extends AppCompatActivity {
         setContentView(R.layout.admin_list);
         this.getSupportActionBar().hide();
 
+//
+
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        List<UserMotif> sharedBookingObject = (List<UserMotif>) bundle.getSerializable("value");
         admin_list_adapter al = new admin_list_adapter(this,motifs);
-       // MyAdapter a = new MyAdapter(this, images);
-        ListView lv = findViewById(R.id.adminlv);
-        lv.setAdapter(al);
 
-
-
+//        MyAdapter a = new MyAdapter(this, images);
+//        ListView lv = findViewById(R.id.adminlv);
+//         lv.setAdapter(al);
+        Log.i("TAG list usermotif", "onCreate: " + sharedBookingObject.get(0).getMotif().getLibelle());
     }
 
     /*public class MyAdapter extends BaseAdapter {

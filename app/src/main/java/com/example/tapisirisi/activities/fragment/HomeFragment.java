@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class HomeFragment extends Fragment {
 //        return inflater.inflate(R.layout.home_fragment, container, false);
         rootView = inflater.inflate(R.layout.home_fragment, container, false);
         image_capturer = rootView.findViewById(R.id.image_capturer);
-        cabture_btn = rootView.findViewById(R.id.cabture_btn);
+        cabture_btn = rootView.findViewById(R.id.button_start_camera);
         chercher = rootView.findViewById(R.id.chercher);
         frameLayout = getActivity().findViewById(R.id.fragment_content);
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -87,7 +86,7 @@ public class HomeFragment extends Fragment {
 
     private void setupView() {
         image_capturer = rootView.findViewById(R.id.image_capturer);
-        cabture_btn = rootView.findViewById(R.id.cabture_btn);
+        cabture_btn = rootView.findViewById(R.id.button_start_camera);
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {

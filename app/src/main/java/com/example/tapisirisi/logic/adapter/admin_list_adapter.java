@@ -56,7 +56,7 @@ public class admin_list_adapter extends BaseAdapter {
 
 
         //sets the text for item name and item description from the current item object
-        imageView.setBackgroundResource(currentMotif.getDrawable());
+//        imageView.setBackgroundResource(currentMotif.getDrawable());
 
 
         // returns the view for the current row

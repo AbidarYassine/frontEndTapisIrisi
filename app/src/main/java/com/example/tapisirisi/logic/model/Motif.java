@@ -1,22 +1,19 @@
 package com.example.tapisirisi.logic.model;
 
-public class Motif {
+import java.io.Serializable;
+
+public class Motif implements Serializable {
     private long id;
-    private int drawable;
     private String libelle;
+    private String description;
 
     public Motif() {
     }
 
-    public Motif(int drawable, String libelle) {
-        this.drawable = drawable;
-        this.libelle = libelle;
-    }
-
-    public Motif(long id, int drawable, String libelle) {
+    public Motif(long id, String libelle, String description) {
         this.id = id;
-        this.drawable = drawable;
         this.libelle = libelle;
+        this.description = description;
     }
 
     public long getId() {
@@ -27,19 +24,19 @@ public class Motif {
         this.id = id;
     }
 
-    public int getDrawable() {
-        return drawable;
-    }
-
-    public void setDrawable(int drawable) {
-        this.drawable = drawable;
-    }
-
     public String getLibelle() {
         return libelle;
     }
 
     public void setLibelle(String libelle) {
         this.libelle = libelle;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
