@@ -48,6 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
+        Log.i("info",user.toString());
         db.execSQL(SQL_DELETE_TABLE);
         db.execSQL(SQL_CREATE_TABLE);
         ContentValues values = new ContentValues();
@@ -63,14 +64,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void update(User user) {
-        delete(user);
-        insertUser(user);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserContrat.UserTable.COLUMN_NAME_NOM,user.getNom());
+        values.put(UserContrat.UserTable.COLUMN_NAME_PRENOM,user.getPrenom());
+        values.put(UserContrat.UserTable.COLUMN_NAME_PASSWORD,user.getPassword());
+        db.update(UserContrat.UserTable.TABLE_NAME,values," LOGIN=?",new String[]{user.getLogin()});
     }
 
     public void delete(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        db.delete(UserContrat.UserTable.TABLE_NAME, "ID = ?", new String[]{user.getId().toString()});
+        db.delete(UserContrat.UserTable.TABLE_NAME, "LOGIN = ?", new String[]{user.getLogin()});
     }
 
     public User getCurrentUser() {
@@ -107,7 +112,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             users.add(user);
             c.moveToNext();
         }
-        return users.get(0);
+        if(users.isEmpty()){
+            return null;
+        }else{
+            return users.get(0);
+        }
+
     }
 
 }

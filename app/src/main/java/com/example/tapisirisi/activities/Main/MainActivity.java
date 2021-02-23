@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     BottomNavigationView buttom_navigation;
     private Context context;
-
     public Context getContext() {
         Context applicationContext = getApplicationContext();
         return applicationContext;
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.account:
                     fragmnetSelected = new AccountFragment();
+
                     break;
             }
             getSupportFragmentManager()
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         });
+
 
 //        try {
 //            th.join();
