@@ -56,6 +56,9 @@ public class AccountFragment extends Fragment {
         CustomSpinner spinner = new CustomSpinner(getContext());
         popup.getButton().setOnClickListener(v -> {
             popup.dismiss();
+            password.setText("");
+            newPassword.setText("");
+            cNewPassword.setText("");
         });
         enregister.setOnClickListener(v -> {
             String nomValue, prenomValue;
