@@ -1,5 +1,6 @@
 package com.example.tapisirisi.activities.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.ServiceImpl.UserServiceImpl;
+import com.example.tapisirisi.activities.Login.Login;
 import com.example.tapisirisi.activities.Main.MainActivity;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
@@ -29,7 +31,7 @@ public class AccountFragment extends Fragment {
     View rootView;
     private TextInputEditText nom, prenom, password, newPassword, cNewPassword;
     private TextInputLayout nomInput;
-    private Button enregister;
+    private Button enregister,logout;
     private TextView login;
     private Button update_prf;
 
@@ -48,9 +50,16 @@ public class AccountFragment extends Fragment {
         cNewPassword = rootView.findViewById(R.id.cNewPassword);
         password = rootView.findViewById(R.id.password);
         enregister = rootView.findViewById(R.id.save);
+        logout = rootView.findViewById(R.id.logout);
         nom.setText(user.getNom());
         prenom.setText(user.getPrenom());
         login.setText(user.getLogin());
+        logout.setOnClickListener(v -> {
+            databaseHelper.delete(user);
+            Intent intent = new Intent(getContext(), Login.class);
+            startActivity(intent);
+
+        });
         String passwordValue = password.getText().toString();
         CustomPopup popup = new CustomPopup(getContext());
         CustomSpinner spinner = new CustomSpinner(getContext());
