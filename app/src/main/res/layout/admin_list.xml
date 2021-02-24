@@ -36,10 +36,11 @@
         <Button
             android:id="@+id/ajouter"
             android:layout_width="120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="0dp"
             android:backgroundTint="#00BCD4"
+            android:onClick="gotoAddUser"
             android:gravity="center"
             android:text="Ajouter"
             android:textAllCaps="false"
@@ -52,7 +53,9 @@
         android:id="@+id/adminlv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"></ListView>
+        android:layout_marginTop="10dp">
+
+    </ListView>
 
 
 </LinearLayout>
