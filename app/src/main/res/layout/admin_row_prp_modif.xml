@@ -22,14 +22,14 @@
         app:layout_constraintVertical_bias="0.309" />
 
     <LinearLayout
-        android:layout_width="287dp"
-        android:layout_height="90dp"
+        android:layout_width="223dp"
+        android:layout_height="88dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/descPropMotif"
-            android:layout_width="252dp"
-            android:layout_height="148dp"
+            android:layout_width="222dp"
+            android:layout_height="match_parent"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
@@ -40,7 +40,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.636" />
 
-
     </LinearLayout>
+    <Button
+        android:id="@+id/enrgModifs"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#1AC4DA"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="-"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
 
 </LinearLayout>

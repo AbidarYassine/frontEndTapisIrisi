@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/modifLibelle"
@@ -25,31 +25,20 @@
                 android:layout_height="41dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="30dp"
+                android:layout_gravity="center"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Name" />
 
-            <Button
-                android:id="@+id/enrgModifs"
-                android:layout_width="129dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#1AC4DA"
-
-                android:gravity="center"
-                android:text="Enregistrer"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp" />
-
         </LinearLayout>
 
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="343dp"
+            android:layout_height="190dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageModif"
@@ -75,18 +64,30 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="357dp"
             android:layout_height="437dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="15dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
 
             <ListView
                 android:id="@+id/propModidlv"
-                android:layout_width="match_parent"
-                android:layout_height="405dp"></ListView>
+                android:layout_width="328dp"
+                android:layout_height="189dp"></ListView>
+            <Button
+                android:id="@+id/enrgModifs"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#1AC4DA"
+android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Enregistrer"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
