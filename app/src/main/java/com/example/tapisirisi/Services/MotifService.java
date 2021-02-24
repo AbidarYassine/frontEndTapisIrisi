@@ -1,8 +1,8 @@
 package com.example.tapisirisi.Services;
 
-import com.example.tapisirisi.logic.model.Motif;
+import com.example.tapisirisi.model.Motif;
 
-import com.example.tapisirisi.logic.model.User;
+import com.example.tapisirisi.model.UserMotif;
 
 
 import java.util.List;
@@ -10,12 +10,9 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.Path;
@@ -32,11 +29,13 @@ public interface MotifService {
     @POST("motif/save/")
     Call<Motif> saveMotif(@Query("libelle") String libelle, @Query("desc") String desc, @Part MultipartBody.Part file, @Query("userId") long userId);
 
-    @PUT("update/{id}")
-    @Headers({"Content-Type: application/json;charset=UTF-8"})
-    Call<Motif> updateMotif(@Body Motif motif, @Path("id") Long id);
+    @Multipart
+    @POST("motif/update/")
+    Call<UserMotif> updateMotif(@Query("idMotif") long idMotif,@Query("libelle") String libelle,  @Part MultipartBody.Part file, @Query("idUserMotif") long id);
 
     @DELETE("/delete/{id}")
     Call<Motif> delteMotif(@Path("id") long id);
+
+
 
 }

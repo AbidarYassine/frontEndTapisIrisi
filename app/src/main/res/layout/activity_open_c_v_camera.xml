@@ -13,7 +13,7 @@
         opencv:show_fps="false"
         opencv:camera_id="any" />
 
-    <com.example.tapisirisi.activities.utilUiOpenCv.OpenCVOverlayView
+    <com.example.tapisirisi.UI.utilUiOpenCv.OpenCVOverlayView
         android:id="@+id/overlay_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>

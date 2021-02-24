@@ -1,6 +1,6 @@
 package com.example.tapisirisi.Services;
 
-import com.example.tapisirisi.logic.model.User;
+import com.example.tapisirisi.model.User;
 
 import java.util.List;
 

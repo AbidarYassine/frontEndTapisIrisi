@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="horizontal"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/libellePropMotif"
-        android:layout_width="83dp"
-        android:layout_height="88dp"
+        android:layout_width="79dp"
+        android:layout_height="84dp"
 
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
 
+        android:lineSpacingExtra="1sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.656"
@@ -22,17 +23,18 @@
         app:layout_constraintVertical_bias="0.309" />
 
     <LinearLayout
-        android:layout_width="223dp"
+        android:layout_width="321dp"
         android:layout_height="88dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/descPropMotif"
-            android:layout_width="222dp"
-            android:layout_height="match_parent"
+            android:layout_width="103dp"
+            android:layout_height="84dp"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:lineSpacingExtra="1sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.66"
@@ -40,18 +42,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.636" />
 
+        <Button
+            android:id="@+id/enrgModifs"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#1AC4DA"
+            android:gravity="center"
+            android:text="-"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
     </LinearLayout>
-    <Button
-        android:id="@+id/enrgModifs"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#1AC4DA"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="-"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
 
 </LinearLayout>

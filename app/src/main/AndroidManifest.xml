@@ -36,20 +36,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapisIrisi"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".ServiceImpl.propriete.deleteProprieteServiceImpl"
+            android:enabled="true"
+            android:exported="true"></service>
 
-
-        <activity android:name=".activities.utilUiOpenCv.CameraStartupActivity" />
+        <activity android:name=".UI.utilUiOpenCv.CameraStartupActivity" />
 
         <service
-            android:name=".ServiceImpl.UserMotifServiceImpl"
+            android:name=".ServiceImpl.UserMotif.UserMotifServiceImpl"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".ServiceImpl.MotifServiceImpl"
+            android:name=".ServiceImpl.Motif.MotifServiceImpl"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".ServiceImpl.propeiter.PropeiterServiceImpl"
+            android:name=".ServiceImpl.propriete.PropeiterServiceImpl"
             android:enabled="true"
             android:exported="true" />
         <service
@@ -57,21 +60,17 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activities.utilUiOpenCv.OpenCVCameraActivity" />
-        <activity android:name=".activities.Admin.Ajout_Prop" />
-        <activity android:name=".activities.utilUiOpenCv.HistoriqueMotifDetailsActivity" />
-        <activity android:name=".activities.utilUiOpenCv.HistoriqueListActivity" />
-        <activity android:name=".activities.Register.Register" />
-        <activity android:name=".activities.Admin.Admin" />
-        <activity android:name=".activities.Main.MainActivity" />
-
-        <activity android:name=".activities.Admin.Ajouter"/>
-
-        <activity android:name=".activities.Admin.Modifier" />
-
-        <activity android:name=".activities.Admin.ModifierMotif" />
-        <activity android:name=".activities.Login.Login">
-
+        <activity android:name=".UI.utilUiOpenCv.OpenCVCameraActivity" />
+        <activity android:name=".UI.Admin.Ajout_Prop" />
+        <activity android:name=".UI.utilUiOpenCv.HistoriqueMotifDetailsActivity" />
+        <activity android:name=".UI.utilUiOpenCv.HistoriqueListActivity" />
+        <activity android:name=".UI.Register.Register" />
+        <activity android:name=".UI.Admin.Admin" />
+        <activity android:name=".UI.Main.MainActivity" />
+        <activity android:name=".UI.Admin.Ajouter" />
+        <activity android:name=".UI.Admin.Modifier" />
+        <activity android:name=".UI.Admin.ModifierMotif" />
+        <activity android:name=".UI.Login.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
