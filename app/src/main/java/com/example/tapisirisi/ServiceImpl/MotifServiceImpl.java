@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.tapisirisi.Services.MotifService;
 import com.example.tapisirisi.activities.Admin.Admin;
+import com.example.tapisirisi.activities.Main.MainActivity;
 import com.example.tapisirisi.logic.adapter.admin_list_adapter;
 import com.example.tapisirisi.logic.model.Motif;
 import com.example.tapisirisi.logic.model.User;
@@ -85,12 +86,12 @@ public class MotifServiceImpl  extends Service {
                     Motif motif1 = response.body();
                     fetchedMotif[0] = motif1;
                     Log.i("UPDATE", motif1.getDescription());
-//                    Intent intent = new Intent(getApplicationContext(), Admin.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    Bundle bundle = new Bundle();
 //                    bundle.putSerializable("updatedMotif", (Serializable) fetchedMotif);
 //                    intent.putExtras(bundle);
-//                    startActivity(intent);
+                   startActivity(intent);
 
                 } else {
                     Log.d("Yo", "Boo!");

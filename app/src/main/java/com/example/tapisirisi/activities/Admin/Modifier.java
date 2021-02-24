@@ -1,7 +1,11 @@
 package com.example.tapisirisi.activities.Admin;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tapisirisi.logic.model.Motif;
 import com.example.tapisirisi.logic.model.Propriete;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,22 +31,20 @@ import java.util.List;
 public class Modifier extends AppCompatActivity {
     String libelles[] = {"l1","l2","l3"};
     String props[] = {"p1","p2,","p3"};
-
+    Bitmap bitmap;
     private ListView lv;
+    private Button modifier;
     private TextView lib;
-
+    ImageView iv;
     private static List<Propriete> motifs = new ArrayList<Propriete>() {{
-        add(new Propriete(1, "test1", "test1"));
-        add(new Propriete(2, "test1", "test2"));
-        add(new Propriete(3, "test1", "test3"));
     }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        this.getSupportActionBar().hide();
         setContentView(R.layout.admin_modif);
+        Log.i("info","onCreateModifier");
         ListView lv = findViewById(R.id.propModidlv);
         this.getSupportActionBar().hide();
 
@@ -49,13 +52,26 @@ public class Modifier extends AppCompatActivity {
         lv.setAdapter(a);
         Button enregistrer = findViewById(R.id.enrgModifs);
         EditText lib = findViewById(R.id.modifLibelle);
-        ImageView iv = findViewById(R.id.imageModif);
+         iv = findViewById(R.id.imageModif);
         EditText libPro = findViewById(R.id.libellePropMotif);
         EditText descPro = findViewById(R.id.descPropMotif);
+        modifier = findViewById(R.id.buttonImageChange);
+
+        modifier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("info","helelelzae$zadlâ");
+                Intent photoPickerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                photoPickerIntent.setType("image/*");
+                startActivityForResult(photoPickerIntent, 1);
+            }
+        });
+
 
         enregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("info","helleazeaezae");
                 Motif m = new Motif();
                 m.setLibelle(libPro.getText().toString());
                 m.setDescription(descPro.getText().toString());
@@ -67,6 +83,19 @@ public class Modifier extends AppCompatActivity {
                 startService(intent);
             }
         });
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri chosenImageUri = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), chosenImageUri);
+                iv.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*public class MyAdapter extends ArrayAdapter<String> {

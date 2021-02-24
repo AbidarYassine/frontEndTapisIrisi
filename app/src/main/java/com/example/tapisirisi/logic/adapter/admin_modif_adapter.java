@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.logic.model.Propriete;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,7 +57,8 @@ public class admin_modif_adapter extends BaseAdapter {
                 convertView.findViewById(R.id.libellePropMotif);
         EditText desc = (EditText)
                 convertView.findViewById(R.id.descPropMotif);
-
+        ImageView imageView = convertView.findViewById(R.id.imageModif);
+       // Picasso.get().load(currentMotif.getFileUrl()).into(imageView);
         //sets the text for item name and item description from the current item object
         desc.setText(currentMotif.getDescription());
         lib.setText(currentMotif.getLibelle());

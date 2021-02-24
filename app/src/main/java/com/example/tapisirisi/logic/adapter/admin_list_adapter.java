@@ -18,6 +18,7 @@ import com.example.tapisirisi.R;
 import com.example.tapisirisi.activities.Admin.ModifierMotif;
 import com.example.tapisirisi.logic.model.Motif;
 import com.example.tapisirisi.logic.model.UserMotif;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.List;
@@ -64,8 +65,8 @@ public class admin_list_adapter extends BaseAdapter {
         // get the TextView for item name and item description
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
-        imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
-        Button btnModifier = (Button) convertView.findViewById(R.id.modifierUserMotif);
+        Picasso.get().load(userMotifs.get(position).getFileUrl()).into(imageView);
+            Button btnModifier = (Button) convertView.findViewById(R.id.ajouterMotif);
         Button btnSupprimer = (Button) convertView.findViewById(R.id.supprimerUserMotif);
 
 //        btnModifier.setId((int) userMotifs.get(position).getId());

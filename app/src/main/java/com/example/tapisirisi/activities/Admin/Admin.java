@@ -3,13 +3,13 @@ package com.example.tapisirisi.activities.Admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.logic.adapter.admin_list_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 
 
 import com.example.tapisirisi.logic.model.Motif;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Admin extends AppCompatActivity {
     private ListView lv;
-
+   private Button ajouterMotif;
     private static List<Motif> motifs = new ArrayList<Motif>() {{
 //        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
@@ -35,7 +35,11 @@ public class Admin extends AppCompatActivity {
         this.getSupportActionBar().hide();
         setContentView(R.layout.admin_list);
         this.getSupportActionBar().hide();
-
+        ajouterMotif = findViewById(R.id.ajouterMotif);
+        ajouterMotif.setOnClickListener(v -> {
+            Intent intent1 = new Intent(this, Ajouter.class);
+            startActivity(intent1);
+        });
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         List<UserMotif> userMotifList = (List<UserMotif>) bundle.getSerializable("value");

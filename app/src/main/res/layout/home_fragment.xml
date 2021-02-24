@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#48CDCD">
 
     <ImageView
         android:id="@+id/image_capturer"
@@ -73,15 +74,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginStart="50dp"
-            android:visibility="gone"
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:background="@drawable/round_btn"
             android:text="@string/chercher"
-            android:textColor="#FFF" />
+            android:textColor="#FFF"
+            android:visibility="gone" />
     </LinearLayout>
 
     <View
@@ -90,8 +91,19 @@
         android:layout_height="130dp"
         android:background="@drawable/header_v"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/goToAdmin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="56dp"
+        android:text="ADMIN"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/vector" />
 
 
     <!-- drawable/vector.xml -->

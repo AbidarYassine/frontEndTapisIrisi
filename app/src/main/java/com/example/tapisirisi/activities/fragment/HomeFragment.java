@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tapisirisi.R;
 
+import com.example.tapisirisi.ServiceImpl.UserMotifServiceImpl;
+import com.example.tapisirisi.activities.Admin.Admin;
+import com.example.tapisirisi.activities.Admin.Ajouter;
+import com.example.tapisirisi.database.DatabaseHelper;
 import com.squareup.picasso.Picasso;
 
 
@@ -33,7 +38,7 @@ import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
     Button cabture_btn;
-    Button chercher;
+    Button chercher, admin;
     FrameLayout frameLayout;
     ImageView image_capturer;
     View rootView;
@@ -47,6 +52,18 @@ public class HomeFragment extends Fragment {
         cabture_btn = rootView.findViewById(R.id.button_start_camera);
         chercher = rootView.findViewById(R.id.chercher);
         frameLayout = getActivity().findViewById(R.id.fragment_content);
+        admin = rootView.findViewById(R.id.goToAdmin);
+
+
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), UserMotifServiceImpl.class);
+                Long id = new DatabaseHelper(getContext()).getCurrentUser().getId();
+                i.putExtra("idUser",String.valueOf(id));
+                getContext().startService(i);
+            }
+        });
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 100);
         }

@@ -36,7 +36,7 @@
         tools:layout_editor_absoluteY="142dp" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/description"
         android:layout_width="252dp"
         android:layout_height="148dp"
         android:ems="10"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.636" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/libelle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -64,7 +64,8 @@
         app:layout_constraintVertical_bias="0.309" />
 
     <Button
-        android:id="@+id/enrgModifs"
+
+        android:id="@+id/ajouterPropriet"
         android:layout_width="125dp"
         android:layout_height="41dp"
         android:background="@drawable/modifier_button"
@@ -87,7 +88,7 @@
         android:layout_height="wrap_content"
         android:text="Libelle : "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/description"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

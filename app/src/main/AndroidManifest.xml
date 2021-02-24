@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -35,10 +36,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapisIrisi"
         android:usesCleartextTraffic="true">
-        <service
-            android:name=".ServiceImpl.Motif.Lister"
-            android:enabled="true"
-            android:exported="true"></service>
+
 
         <activity android:name=".activities.utilUiOpenCv.CameraStartupActivity" />
 
@@ -50,6 +48,14 @@
             android:name=".ServiceImpl.MotifServiceImpl"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".ServiceImpl.propeiter.PropeiterServiceImpl"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".ServiceImpl.Motif.AddMotifService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".activities.utilUiOpenCv.OpenCVCameraActivity" />
         <activity android:name=".activities.Admin.Ajout_Prop" />
@@ -58,11 +64,14 @@
         <activity android:name=".activities.Register.Register" />
         <activity android:name=".activities.Admin.Admin" />
         <activity android:name=".activities.Main.MainActivity" />
-        <activity android:name=".activities.Admin.Ajouter" />
+
+        <activity android:name=".activities.Admin.Ajouter"/>
+
         <activity android:name=".activities.Admin.Modifier" />
 
         <activity android:name=".activities.Admin.ModifierMotif" />
         <activity android:name=".activities.Login.Login">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

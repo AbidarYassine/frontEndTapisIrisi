@@ -23,6 +23,15 @@ public class Motif implements Serializable {
     public Motif() {
     }
 
+    public Motif(String libelle, String description) {
+        this.libelle = libelle;
+        this.description = description;
+    }
+
+    public Motif(String libelle) {
+        this.libelle = libelle;
+    }
+
     public Motif(long id, String libelle, String description) {
         this.id = id;
         this.libelle = libelle;

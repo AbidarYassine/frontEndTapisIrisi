@@ -59,13 +59,13 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <Button
-                android:id="@+id/imageChange"
+                android:id="@+id/buttonImageChange"
                 android:layout_width="193dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="52dp"
                 android:layout_gravity="center"
-               android:layout_marginBottom="20dp"
-               android:layout_marginLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="#EFA314"
                 android:gravity="center"
                 android:text="Modifier l'image"

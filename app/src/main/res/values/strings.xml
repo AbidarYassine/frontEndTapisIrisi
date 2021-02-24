@@ -35,4 +35,9 @@
     <string name="take_img">Essayer de prendre une photo de votre motif</string>
     <string name="capturer">Capturer</string>
     <string name="chercher">Chercher</string>
+    <string name="libelle">Libelle</string>
+    <string name="desciption">Description</string>
+    <string name="ajouter_un_nouveaux_motif">Ajouter Un Nouveaux Motif</string>
+    <string name="ajouter_photo">Ajouter une photo</string>
+    <string name="enregistre">Enregistrer</string>
 </resources>

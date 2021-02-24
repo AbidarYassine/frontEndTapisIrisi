@@ -151,7 +151,7 @@ public class UserServiceImpl {
                        databaseHelper.insertUser(fetchedUser[0]);
                      //context.startActivity(intent);
                         Intent i = new Intent(context, UserMotifServiceImpl.class);
-                        i.putExtra("idUser", "1");
+                        i.putExtra("idUser", databaseHelper.getCurrentUser().getId());
                         context.startService(i);
 
                     }

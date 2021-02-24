@@ -33,14 +33,15 @@ public class UserMotifServiceImpl extends Service {
 
     public void getAllUserMotifs(Long id) {
         Call<List<UserMotif>> call = userMotifService.getAllUserMotif(id);
-        final List<UserMotif> fetchedUserMotif = new ArrayList<UserMotif>();
+        final List<UserMotif> fetchedUserMotif = new ArrayList<>();
         call.enqueue(new Callback<List<UserMotif>>() {
             @Override
             public void onResponse(Call<List<UserMotif>> call, Response<List<UserMotif>> response) {
                 Log.i(TAG, "getAllUserMotif: " + response.body());
                 if (response.isSuccessful()) {
-                    List userMotifs = response.body();
+                    List<UserMotif> userMotifs = response.body();
                     fetchedUserMotif.addAll(userMotifs);
+                    Log.i("info",userMotifs.get(0).getFileUrl());
                     Intent intent = new Intent(getApplicationContext(), Admin.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Bundle bundle = new Bundle();
@@ -69,6 +70,7 @@ public class UserMotifServiceImpl extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Long id = Long.valueOf(intent.getStringExtra("idUser"));
+        Log.i("info OnStartCOmmande : ",id.toString());
         getAllUserMotifs(id);
         return START_NOT_STICKY;
     }
