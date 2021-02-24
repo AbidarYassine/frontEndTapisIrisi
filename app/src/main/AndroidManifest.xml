@@ -35,7 +35,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TapisIrisi"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.utilUiOpenCv.CameraStartupActivity"></activity>
+        <service
+            android:name=".ServiceImpl.Motif.Lister"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".activities.utilUiOpenCv.CameraStartupActivity" />
 
         <service
             android:name=".ServiceImpl.UserMotifServiceImpl"
@@ -55,6 +60,8 @@
         <activity android:name=".activities.Main.MainActivity" />
         <activity android:name=".activities.Admin.Ajouter" />
         <activity android:name=".activities.Admin.Modifier" />
+
+        <activity android:name=".activities.Admin.ModifierMotif" />
         <activity android:name=".activities.Login.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

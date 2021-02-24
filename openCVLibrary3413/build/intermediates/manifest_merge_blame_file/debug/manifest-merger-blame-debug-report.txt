@@ -5,10 +5,10 @@
 5    android:versionName="3.4.13" >
 6
 7    <uses-sdk
-7-->C:\Users\yassi\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
-8        android:minSdkVersion="8"
-8-->C:\Users\yassi\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
-9        android:targetSdkVersion="29" />
-9-->C:\Users\yassi\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:15-44
+7-->C:\Users\DELL\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
+8        android:minSdkVersion="21"
+8-->C:\Users\DELL\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:5-47
+9        android:targetSdkVersion="30" />
+9-->C:\Users\DELL\AndroidStudioProjects\frontEndTapisIrisi\openCVLibrary3413\src\main\AndroidManifest.xml:7:15-44
 10
 11</manifest>

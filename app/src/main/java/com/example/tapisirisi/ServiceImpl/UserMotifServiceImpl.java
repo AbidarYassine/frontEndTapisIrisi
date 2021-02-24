@@ -31,8 +31,8 @@ public class UserMotifServiceImpl extends Service {
             .build();
     static private UserMotifService userMotifService = retrofit.create(UserMotifService.class);
 
-    public void getAllUserMotifs() {
-        Call<List<UserMotif>> call = userMotifService.getAllUserMotif();
+    public void getAllUserMotifs(Long id) {
+        Call<List<UserMotif>> call = userMotifService.getAllUserMotif(id);
         final List<UserMotif> fetchedUserMotif = new ArrayList<UserMotif>();
         call.enqueue(new Callback<List<UserMotif>>() {
             @Override
@@ -46,12 +46,12 @@ public class UserMotifServiceImpl extends Service {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("value", (Serializable) fetchedUserMotif);
                     intent.putExtras(bundle);
+                   // Log.i("UserMotifServiceImpl", bundle.toString());
                     startActivity(intent);
                 } else {
                     Log.d("Yo", "Boo!");
                 }
             }
-
             @Override
             public void onFailure(Call<List<UserMotif>> call, Throwable t) {
                 Log.i("TAGerr", t.getMessage());
@@ -68,7 +68,8 @@ public class UserMotifServiceImpl extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        getAllUserMotifs();
+        Long id = Long.valueOf(intent.getStringExtra("idUser"));
+        getAllUserMotifs(id);
         return START_NOT_STICKY;
     }
 

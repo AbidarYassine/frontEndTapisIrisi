@@ -15,7 +15,7 @@ public class Ajout_Prop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout__prop);
-        Button returnBtn = findViewById(R.id.ajouterProprieté);
+        Button returnBtn = findViewById(R.id.enrgModifs);
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

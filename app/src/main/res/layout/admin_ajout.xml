@@ -63,7 +63,7 @@
         android:id="@+id/proplv"
         android:layout_width="305dp"
         android:layout_height="177dp"
-        app:layout_constraintBottom_toTopOf="@+id/ajouterProprieté"
+        app:layout_constraintBottom_toTopOf="@+id/enrgModifs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"

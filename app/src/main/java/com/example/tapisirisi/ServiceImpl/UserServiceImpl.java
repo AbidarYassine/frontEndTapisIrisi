@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.Window;
 
 import com.example.tapisirisi.Services.UserService;
+import com.example.tapisirisi.activities.Admin.Admin;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
 import com.example.tapisirisi.database.DatabaseHelper;
 import com.example.tapisirisi.logic.model.User;
+import com.example.tapisirisi.utils.Consts;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class UserServiceImpl {
 
     public static void getClient() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.56.1:7700/tapis-irisi/")
+                .baseUrl(Consts.API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userService = retrofit.create(UserService.class);
@@ -78,8 +80,8 @@ public class UserServiceImpl {
                         popup.build();
                     } else {
                         // rediriger vers l'espace utilisateur
-                    }
 
+                    }
 
                 }
             }
@@ -147,7 +149,11 @@ public class UserServiceImpl {
                        // context.startActivity(intent);
                         spinner.dismiss();
                        databaseHelper.insertUser(fetchedUser[0]);
-                        context.startActivity(intent);
+                     //context.startActivity(intent);
+                        Intent i = new Intent(context, UserMotifServiceImpl.class);
+                        i.putExtra("idUser", "1");
+                        context.startService(i);
+
                     }
 
                 }

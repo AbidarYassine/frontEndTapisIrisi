@@ -1,17 +1,25 @@
 package com.example.tapisirisi.activities.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.example.tapisirisi.R;
+import com.example.tapisirisi.ServiceImpl.MotifServiceImpl;
 import com.example.tapisirisi.logic.adapter.admin_modif_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tapisirisi.logic.model.Motif;
 import com.example.tapisirisi.logic.model.Propriete;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +47,26 @@ public class Modifier extends AppCompatActivity {
 
         admin_modif_adapter a = new admin_modif_adapter(this, motifs);
         lv.setAdapter(a);
+        Button enregistrer = findViewById(R.id.enrgModifs);
+        EditText lib = findViewById(R.id.modifLibelle);
+        ImageView iv = findViewById(R.id.imageModif);
+        EditText libPro = findViewById(R.id.libellePropMotif);
+        EditText descPro = findViewById(R.id.descPropMotif);
 
+        enregistrer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Motif m = new Motif();
+                m.setLibelle(libPro.getText().toString());
+                m.setDescription(descPro.getText().toString());
+
+                Intent intent = new Intent(getApplicationContext(), MotifServiceImpl.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("updetedMotif", (Serializable) m);
+                intent.putExtras(bundle);
+                startService(intent);
+            }
+        });
     }
 
     /*public class MyAdapter extends ArrayAdapter<String> {

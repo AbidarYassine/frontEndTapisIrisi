@@ -1,37 +1,48 @@
 package com.example.tapisirisi.logic.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tapisirisi.R;
+import com.example.tapisirisi.activities.Admin.ModifierMotif;
 import com.example.tapisirisi.logic.model.Motif;
+import com.example.tapisirisi.logic.model.UserMotif;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class admin_list_adapter extends BaseAdapter {
 
-    private List<Motif> motifs;
+    private List<UserMotif> userMotifs;
     private Context context;
 
-    public admin_list_adapter(Context context, List<Motif> motifs) {
+    LayoutInflater inflter;
+
+    public admin_list_adapter(Context context, List<UserMotif> userMotifs) {
         this.context = context;
-        this.motifs = motifs;
+        this.userMotifs = userMotifs;
+        inflter = (LayoutInflater.from(context));
     }
 
     @Override
     public int getCount() {
-        return motifs.size();
+        return userMotifs.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return motifs.get(position);
+        return userMotifs.get(position);
     }
 
     @Override
@@ -48,34 +59,58 @@ public class admin_list_adapter extends BaseAdapter {
         }
 
         // get current item to be displayed
-        Motif currentMotif = (Motif) getItem(position);
+        UserMotif currentMotif = (UserMotif) getItem(position);
 
         // get the TextView for item name and item description
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
+        imageView.setImageResource(R.drawable.ic_baseline_account_circle_24);
+        Button btnModifier = (Button) convertView.findViewById(R.id.modifierUserMotif);
+        Button btnSupprimer = (Button) convertView.findViewById(R.id.supprimerUserMotif);
+
+//        btnModifier.setId((int) userMotifs.get(position).getId());
+//        btnSupprimer.setId((int) userMotifs.get(position).getId());
+
+        LinearLayout l = (LinearLayout) convertView.findViewById(R.id.lbtn);
+        l.setId((int)userMotifs.get(position).getId());
+btnModifier.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(context, ModifierMotif.class);
+        Bundle b = new Bundle();
+        b.putInt("idUserMotif", l.getId());
+        for (UserMotif um:userMotifs) {
+            if (um.getId() == l.getId()){
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("userMotif", (Serializable) userMotifs.get(position));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        }
 
 
-        //sets the text for item name and item description from the current item object
-//        imageView.setBackgroundResource(currentMotif.getDrawable());
+    }
+});
+Log.i("id", String.valueOf(l.getId()));
 
-
-        // returns the view for the current row
         return convertView;
     }
 
     public void setMotifs(List<Motif> motifs)
     {
-        this.motifs = motifs;
+        this.userMotifs = userMotifs;
     }
 
 }
 
 class adminViewHolder extends RecyclerView.ViewHolder {
-    public ImageView motifLibelleImageView;
+    public ImageView motifImageView;
+
 
     public adminViewHolder(View view) {
         super(view);
-        this.motifLibelleImageView = (ImageView) view.findViewById(R.id.image);
+        this.motifImageView = (ImageView) view.findViewById(R.id.image);
+
     }
 }
 
