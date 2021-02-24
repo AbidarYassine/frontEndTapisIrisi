@@ -1,11 +1,24 @@
 package com.example.tapisirisi.logic.model;
 
+import android.text.Editable;
+
 import java.io.Serializable;
+import java.util.List;
 
 public class Motif implements Serializable {
     private long id;
     private String libelle;
     private String description;
+
+    public List<Propriete> getProprietes() {
+        return proprietes;
+    }
+
+    public void setProprietes(List<Propriete> proprietes) {
+        this.proprietes = proprietes;
+    }
+
+    private List<Propriete> proprietes;
 
     public Motif() {
     }
@@ -33,6 +46,7 @@ public class Motif implements Serializable {
         this.id = id;
     }
 
+
     public String getLibelle() {
         return libelle;
     }
@@ -48,4 +62,5 @@ public class Motif implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

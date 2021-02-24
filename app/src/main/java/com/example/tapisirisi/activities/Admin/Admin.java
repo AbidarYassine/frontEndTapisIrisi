@@ -36,17 +36,13 @@ public class Admin extends AppCompatActivity {
         setContentView(R.layout.admin_list);
         this.getSupportActionBar().hide();
 
-//
-
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        List<UserMotif> sharedBookingObject = (List<UserMotif>) bundle.getSerializable("value");
-        admin_list_adapter al = new admin_list_adapter(this,motifs);
-
+        List<UserMotif> userMotifList = (List<UserMotif>) bundle.getSerializable("value");
+        admin_list_adapter al = new admin_list_adapter(this,userMotifList);
 //        MyAdapter a = new MyAdapter(this, images);
-//        ListView lv = findViewById(R.id.adminlv);
-//         lv.setAdapter(al);
-        Log.i("TAG list usermotif", "onCreate: " + sharedBookingObject.get(0).getMotif().getLibelle());
+       ListView lv = findViewById(R.id.adminlv);
+        lv.setAdapter(al);
     }
 
     /*public class MyAdapter extends BaseAdapter {

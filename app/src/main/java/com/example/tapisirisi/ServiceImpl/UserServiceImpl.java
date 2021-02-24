@@ -8,10 +8,12 @@ import android.util.Log;
 import android.view.Window;
 
 import com.example.tapisirisi.Services.UserService;
+import com.example.tapisirisi.activities.Admin.Admin;
 import com.example.tapisirisi.activities.Register.CustomPopup;
 import com.example.tapisirisi.activities.Register.CustomSpinner;
 import com.example.tapisirisi.database.DatabaseHelper;
 import com.example.tapisirisi.logic.model.User;
+import com.example.tapisirisi.utils.Consts;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class UserServiceImpl {
 
     public static void getClient() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.56.1:7700/tapis-irisi/")
+                .baseUrl(Consts.API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userService = retrofit.create(UserService.class);
@@ -78,8 +80,8 @@ public class UserServiceImpl {
                         popup.build();
                     } else {
                         // rediriger vers l'espace utilisateur
-                    }
 
+                    }
 
                 }
             }
@@ -95,7 +97,33 @@ public class UserServiceImpl {
         });
         return fetchedUser[0];
     }
+    public static void update(User user,CustomPopup popup,CustomSpinner spinner){
+        getClient();
+        Call<User> call = userService.update(user);
+        final User[] fetchedUser = new User[1];
+        Log.i("info","eeeeeeeeeeeee");
+        spinner.show();
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                spinner.dismiss();
+                if(response.isSuccessful()){
+                    Log.i("info","bbvdvd");
+                    popup.setTitle("Succès");
+                    popup.setContent("Modification bien enregistrées");
+                    popup.build();
+                }
 
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                spinner.dismiss();
+                popup.setTitle("Ouups");
+                popup.setContent("Erreur 505");
+            }
+        });
+    }
     public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent, Context context) {
         getClient();
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
@@ -120,8 +148,12 @@ public class UserServiceImpl {
                     } else {
                        // context.startActivity(intent);
                         spinner.dismiss();
-                       // databaseHelper.insertUser(fetchedUser[0]);
-                        context.startActivity(intent);
+                       databaseHelper.insertUser(fetchedUser[0]);
+                     //context.startActivity(intent);
+                        Intent i = new Intent(context, UserMotifServiceImpl.class);
+                        i.putExtra("idUser", "1");
+                        context.startService(i);
+
                     }
 
                 }

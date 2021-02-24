@@ -52,9 +52,9 @@ public class admin_modif_adapter extends BaseAdapter {
 
         // get the TextView for item name and item description
         EditText lib = (EditText)
-                convertView.findViewById(R.id.libelle);
+                convertView.findViewById(R.id.libellePropMotif);
         EditText desc = (EditText)
-                convertView.findViewById(R.id.desc);
+                convertView.findViewById(R.id.descPropMotif);
 
         //sets the text for item name and item description from the current item object
         desc.setText(currentMotif.getDescription());
@@ -79,8 +79,8 @@ class adminModifViewHolder extends RecyclerView.ViewHolder {
 
     public adminModifViewHolder(View view) {
         super(view);
-        this.modifDescription = (EditText) view.findViewById(R.id.desc);
-        this.modifLibelle = (EditText) view.findViewById(R.id.libelle);
+        this.modifDescription = (EditText) view.findViewById(R.id.descPropMotif);
+        this.modifLibelle = (EditText) view.findViewById(R.id.libellePropMotif);
     }
 }
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapisirisi.R;
+import com.example.tapisirisi.ServiceImpl.UserMotifServiceImpl;
 import com.example.tapisirisi.ServiceImpl.UserServiceImpl;
 import com.example.tapisirisi.activities.Main.MainActivity;
 import com.example.tapisirisi.activities.Register.CustomPopup;
@@ -31,14 +32,18 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
         // hide the action bar
-//        this.getSupportActionBar().hide();
+        this.getSupportActionBar().hide();
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         User user = databaseHelper.getCurrentUser();
+
+
         if(user != null){
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
         }else{
+
             btn = findViewById(R.id.loginButton);
             login = findViewById(R.id.loginInput);
             password = findViewById(R.id.passwordInput);
@@ -65,10 +70,12 @@ public class Login extends AppCompatActivity {
                     showPopup("Ouups", "tous les champs sont obligatoires");
                 } else {
                     UserServiceImpl.login(loginValue, passwordValue, spinner, popup, intent1, this);
+
                 }
             });
-        }
 
+
+        }
 
 
     }

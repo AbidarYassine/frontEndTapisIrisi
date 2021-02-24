@@ -11,8 +11,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,14 +46,15 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
+                android:id="@+id/login"
                 android:layout_width="match_parent"
-                android:text="@string/login"
-                android:gravity="center"
-                android:textSize="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:padding="10dp"
-                android:textStyle="bold"
-                android:layout_height="wrap_content">
+                android:text="@string/login"
+                android:textSize="20sp"
+                android:textStyle="bold">
 
             </TextView>
 
@@ -96,14 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/image" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginEnd="32dp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout4"
@@ -158,17 +154,34 @@
                     android:hint="@string/confirm"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
+            <LinearLayout  android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/btn_take_img"
-                android:gravity="center"
-                android:text="@string/save" />
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_take_img"
+                    android:gravity="center"
+                    android:text="@string/save" />
+
+                <Button
+                    android:id="@+id/logout"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/btn_take_img"
+                    android:gravity="center"
+                    android:text="@string/logout" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </ScrollView>

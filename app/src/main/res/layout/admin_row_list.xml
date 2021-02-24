@@ -10,30 +10,31 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/image"/>
+
     <LinearLayout
+        android:id="@+id/lbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/ajouter"
+            android:id="@+id/modifierUserMotif"
             android:layout_width="120dp"
-            android:gravity="center"
             android:layout_height="match_parent"
             android:background="@drawable/modifier_button"
             android:backgroundTint="#FBB127"
+            android:gravity="center"
             android:text="Modifier"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp" />
 
         <Button
-            android:layout_marginTop="10dp"
-            android:id="@+id/supprimer"
+            android:id="@+id/supprimerUserMotif"
             android:layout_width="120dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:background="@drawable/supprimer_button"
             android:backgroundTint="#FBB127"
             android:text="Supprimer"

@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/libelle"
+        android:id="@+id/libellePropMotif"
         android:layout_width="83dp"
         android:layout_height="88dp"
 
@@ -27,7 +27,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/desc"
+            android:id="@+id/descPropMotif"
             android:layout_width="252dp"
             android:layout_height="148dp"
             android:ems="10"

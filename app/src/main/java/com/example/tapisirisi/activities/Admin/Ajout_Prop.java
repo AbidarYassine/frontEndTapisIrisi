@@ -31,6 +31,7 @@ public class Ajout_Prop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajout__prop);
+
         setupView();
         this.getSupportActionBar().hide();
         context = this;
@@ -49,8 +50,10 @@ public class Ajout_Prop extends AppCompatActivity {
         if (motifSaved != null) {
             Toast.makeText(this, "" + motifSaved.getLibelle(), Toast.LENGTH_SHORT).show();
         }
-        ajouterPropriet.setOnClickListener(new View.OnClickListener() {
 
+
+
+        ajouterPropriet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validationData()) {
