@@ -39,10 +39,10 @@ public class Login extends AppCompatActivity {
         User user = databaseHelper.getCurrentUser();
 
 
-        if(user != null){
-            Intent intent = new Intent(this,MainActivity.class);
+        if (user != null) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }else{
+        } else {
 
             btn = findViewById(R.id.loginButton);
             login = findViewById(R.id.loginInput);
@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
                     showPopup("Ouups", "tous les champs sont obligatoires");
                 } else {
                     UserServiceImpl.login(loginValue, passwordValue, spinner, popup, intent1, this);
-
+                    finish();
                 }
             });
 
