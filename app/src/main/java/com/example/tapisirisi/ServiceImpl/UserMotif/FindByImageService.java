@@ -8,9 +8,9 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.tapisirisi.Common.utils.Consts;
 import com.example.tapisirisi.Services.UserMotifService;
 import com.example.tapisirisi.model.UserMotif;
-import com.example.tapisirisi.utils.Consts;
 
 import java.io.File;
 import java.io.Serializable;

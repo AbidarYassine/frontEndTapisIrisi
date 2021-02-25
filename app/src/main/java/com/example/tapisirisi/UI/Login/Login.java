@@ -3,6 +3,7 @@ package com.example.tapisirisi.UI.Login;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tapisirisi.Common.database.DatabaseHelper;
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.ServiceImpl.User.UserServiceImpl;
+import com.example.tapisirisi.ServiceImpl.UserMotif.UserMotifServiceImpl;
 import com.example.tapisirisi.UI.Main.MainActivity;
 import com.example.tapisirisi.UI.Register.CustomPopup;
 import com.example.tapisirisi.UI.Register.CustomSpinner;
 import com.example.tapisirisi.UI.Register.Register;
+import com.example.tapisirisi.model.Role;
 import com.example.tapisirisi.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -37,8 +40,16 @@ public class Login extends AppCompatActivity {
 
 
         if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            Log.i("TAG", "onCreate: user id" + user.getRole());
+            if (user.getRole().equals(Role.ADMIN)) {
+                Intent i = new Intent(Login.this, UserMotifServiceImpl.class);
+                Long id = user.getId();
+                i.putExtra("idUser", String.valueOf(id));
+                Login.this.startService(i);
+            } else {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
         } else {
 
             btn = findViewById(R.id.loginButton);
@@ -97,9 +108,9 @@ public class Login extends AppCompatActivity {
             String loginValue = login.getText().toString();
             String passwordValue = password.getText().toString();
             if (loginValue.equals("") || passwordValue.equals("")) {
-
                 showPopup("Ouups", "tous les champs sont obligatoires");
             } else {
+                Log.i("TAG", "onCreate: dflkdsfdslfndskfndslfdsfks");
                 UserServiceImpl.login(loginValue, passwordValue, spinner, popup, intent, this);
             }
         });
@@ -111,6 +122,5 @@ public class Login extends AppCompatActivity {
 
         popup.build();
         popup.getWindow().setLayout(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
-
     }
 }

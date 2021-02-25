@@ -94,6 +94,8 @@ import java.util.List;
                     }
                     bundle.putSerializable("picture", (Serializable) pictureFile);
                     bundle.putLong("idUserMotif",userMotif.getId());
+                }else  {
+                    
                 }
                  Intent intent = new Intent(getApplicationContext(), MotifServiceImpl.class);
                 m.setProprietes(proprietes);

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.tapisirisi.model.Role;
 import com.example.tapisirisi.model.User;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.i("info",user.toString());
+        Log.i("info", user.toString());
         db.execSQL(SQL_DELETE_TABLE);
         db.execSQL(SQL_CREATE_TABLE);
         ContentValues values = new ContentValues();
@@ -66,10 +67,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void update(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(UserContrat.UserTable.COLUMN_NAME_NOM,user.getNom());
-        values.put(UserContrat.UserTable.COLUMN_NAME_PRENOM,user.getPrenom());
-        values.put(UserContrat.UserTable.COLUMN_NAME_PASSWORD,user.getPassword());
-        db.update(UserContrat.UserTable.TABLE_NAME,values," LOGIN=?",new String[]{user.getLogin()});
+        values.put(UserContrat.UserTable.COLUMN_NAME_NOM, user.getNom());
+        values.put(UserContrat.UserTable.COLUMN_NAME_PRENOM, user.getPrenom());
+        values.put(UserContrat.UserTable.COLUMN_NAME_PASSWORD, user.getPassword());
+        db.update(UserContrat.UserTable.TABLE_NAME, values, " LOGIN=?", new String[]{user.getLogin()});
     }
 
     public void delete(User user) {
@@ -109,12 +110,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setPassword(c.getString(c.getColumnIndex(UserContrat.UserTable.COLUMN_NAME_PASSWORD)));
             user.setPrenom(c.getString(c.getColumnIndex(UserContrat.UserTable.COLUMN_NAME_PRENOM)));
             user.setProfile_image(c.getBlob(c.getColumnIndex(UserContrat.UserTable.COLUMN_NAME_PROFILE_IMAGE)));
+            String role = c.getString(c.getColumnIndex(UserContrat.UserTable.COLUMN_NAME_ROLE));
+            if (role.equals("ADMIN"))
+                user.setRole(Role.ADMIN);
+            else
+                user.setRole(Role.USER);
             users.add(user);
             c.moveToNext();
         }
-        if(users.isEmpty()){
+        if (users.isEmpty()) {
             return null;
-        }else{
+        } else {
             return users.get(0);
         }
 

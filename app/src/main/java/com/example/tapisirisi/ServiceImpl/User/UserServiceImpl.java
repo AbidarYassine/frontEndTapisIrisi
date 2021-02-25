@@ -127,7 +127,7 @@ public class UserServiceImpl {
     public static User login(String login, String password, CustomSpinner spinner, CustomPopup popup, Intent intent, Context context) {
         getClient();
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        Log.i("info", "//////////////////////");
+        Log.i("info login", "//////////////////////");
         Call<User> call = userService.login(login, password);
         final User[] fetchedUser = new User[1];
         spinner.show();
