@@ -14,7 +14,6 @@ import com.example.tapisirisi.Services.PropreiteService;
 import com.example.tapisirisi.UI.Main.MainActivity;
 import com.example.tapisirisi.model.Motif;
 import com.example.tapisirisi.model.UserMotif;
-
 import java.io.File;
 
 import okhttp3.MediaType;

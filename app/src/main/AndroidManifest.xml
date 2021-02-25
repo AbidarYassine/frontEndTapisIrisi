@@ -68,17 +68,17 @@
         <activity android:name=".UI.utilUiOpenCv.HistoriqueListActivity" />
         <activity android:name=".UI.Register.Register" />
         <activity android:name=".UI.Admin.Admin" />
-        <activity android:name=".UI.Main.MainActivity" >
+        <activity android:name=".UI.Main.MainActivity" />
+        <activity android:name=".UI.Admin.Ajouter" />
+        <activity android:name=".UI.Admin.Modifier" />
+        <activity android:name=".UI.Admin.ModifierMotif" />
+        <activity android:name=".UI.Login.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Admin.Ajouter" />
-        <activity android:name=".UI.Admin.Modifier" />
-        <activity android:name=".UI.Admin.ModifierMotif" />
-        <activity android:name=".UI.Login.Login"/>
     </application>
 
 </manifest>
