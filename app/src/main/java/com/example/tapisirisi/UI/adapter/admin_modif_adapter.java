@@ -24,7 +24,7 @@ import java.util.List;
 public class admin_modif_adapter extends BaseAdapter {
 
     private List<Propriete> motifs;
-    private Context context;
+    private final Context context;
 
     public admin_modif_adapter(Context context, List<Propriete> motifs) {
         this.context = context;
@@ -67,10 +67,8 @@ public class admin_modif_adapter extends BaseAdapter {
             context.startService(intent);
         });
         // get the TextView for item name and item description
-        EditText lib = (EditText)
-                convertView.findViewById(R.id.libellePropMotif);
-        EditText desc = (EditText)
-                convertView.findViewById(R.id.descPropMotif);
+        EditText lib = convertView.findViewById(R.id.libellePropMotif);
+        EditText desc = convertView.findViewById(R.id.descPropMotif);
         ImageView imageView = convertView.findViewById(R.id.imageModif);
        // Picasso.get().load(currentMotif.getFileUrl()).into(imageView);
         //sets the text for item name and item description from the current item object
@@ -118,8 +116,8 @@ class adminModifViewHolder extends RecyclerView.ViewHolder {
 
     public adminModifViewHolder(View view) {
         super(view);
-        this.modifDescription = (EditText) view.findViewById(R.id.descPropMotif);
-        this.modifLibelle = (EditText) view.findViewById(R.id.libellePropMotif);
+        this.modifDescription = view.findViewById(R.id.descPropMotif);
+        this.modifLibelle = view.findViewById(R.id.libellePropMotif);
     }
 }
 

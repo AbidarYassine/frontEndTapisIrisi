@@ -1,7 +1,11 @@
 package com.example.tapisirisi.UI.utilUiOpenCv;
 
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,13 +14,25 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapisirisi.R;
-import com.example.tapisirisi.ServiceImpl.Motif.MotifServiceImpl;
+import com.example.tapisirisi.ServiceImpl.UserMotif.FindByImageService;
+import com.example.tapisirisi.model.Propriete;
+import com.example.tapisirisi.model.UserMotif;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.squareup.picasso.Picasso;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -36,7 +52,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,8 +88,153 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
     private CameraBridgeViewBase mOpenCvCameraView;
     private Toast toast;
     private OpenCVOverlayView overlayView;
+    private LinearLayout bottomSheetLayout;
+    private LinearLayout gestureLayout;
+    private BottomSheetBehavior sheetBehavior;
+    protected ImageView bottomSheetArrowImageView;
+    private ImageView recognitionImageView;
+    private TextView recognitionTextViewLibelle;
+    private TextView recognitionTextViewDescription;
+    private ImageView recognitionImageView1;
+    private TextView recognitionTextViewLibelle1;
+    private TextView recognitionTextViewDescription1;
+    private ImageView recognitionImageView2;
+    private TextView recognitionTextViewLibelle2;
+    private TextView recognitionTextViewDescription2;
+    private boolean dataIsAvailable = false;
+    private boolean waitingForFrameResult = false;
+    private Bitmap motifBitmap;
+    private RelativeLayout mRelativeZaplon;
+    private RelativeLayout mRelativeToSlide;
+    private boolean isVisible = false;
+    private RelativeLayout mRelativeZaplon1;
+    private RelativeLayout mRelativeToSlide1;
+    private boolean isVisible1 = false;
+    private RelativeLayout mRelativeZaplon2;
+    private RelativeLayout mRelativeToSlide2;
+    private boolean isVisible2 = false;
+    private TextView proprieteTextView, proprieteTextView1, proprieteTextView2;
 
-    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "called onCreate");
+        super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setContentView(R.layout.activity_open_c_v_camera);
+        setTitle("Détecter un motif");
+
+        // get the OverlayView responsible for displaying images on top of the camera
+        overlayView = findViewById(R.id.overlay_view);
+        mOpenCvCameraView = findViewById(R.id.opencv_camera_view);
+
+        if (FIXED_FRAME_SIZE) {
+            mOpenCvCameraView.setMaxFrameSize(FRAME_SIZE_WIDTH, FRAME_SIZE_HEIGHT);
+        }
+        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+
+        mOpenCvCameraView.setCvCameraViewListener(this);
+
+        mi = new ActivityManager.MemoryInfo();
+        activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+
+        // bottom sheet layout elements initialisation
+        bottomSheetLayout = findViewById(R.id.bottom_sheet_layout);
+        gestureLayout = findViewById(R.id.gesture_layout);
+        sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout);
+        bottomSheetArrowImageView = findViewById(R.id.bottom_sheet_arrow);
+
+        sheetBehavior.setBottomSheetCallback(
+                new BottomSheetBehavior.BottomSheetCallback() {
+                    @Override
+                    public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                        switch (newState) {
+                            case BottomSheetBehavior.STATE_HIDDEN:
+                                break;
+                            case BottomSheetBehavior.STATE_EXPANDED: {
+                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_down);
+                            }
+                            break;
+                            case BottomSheetBehavior.STATE_COLLAPSED: {
+                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
+                            }
+                            break;
+                            case BottomSheetBehavior.STATE_DRAGGING:
+                                break;
+                            case BottomSheetBehavior.STATE_SETTLING:
+                                bottomSheetArrowImageView.setImageResource(R.drawable.icn_chevron_up);
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                    }
+                });
+
+        recognitionImageView = findViewById(R.id.detected_motif_image);
+        recognitionTextViewLibelle = findViewById(R.id.detected_motif_libelle);
+        recognitionTextViewDescription = findViewById(R.id.detcted_motif_description);
+        recognitionImageView1 = findViewById(R.id.detected_motif_image1);
+        recognitionTextViewLibelle1 = findViewById(R.id.detected_motif_libelle1);
+        recognitionTextViewDescription1 = findViewById(R.id.detcted_motif_description1);
+        recognitionImageView2 = findViewById(R.id.detected_motif_image2);
+        recognitionTextViewLibelle2 = findViewById(R.id.detected_motif_libelle2);
+        recognitionTextViewDescription2 = findViewById(R.id.detcted_motif_description2);
+
+        mRelativeZaplon = findViewById(R.id.relativeZaplon);
+        mRelativeToSlide = findViewById(R.id.relativevToSlide);
+        mRelativeZaplon1 = findViewById(R.id.relativeZaplon1);
+        mRelativeToSlide1 = findViewById(R.id.relativevToSlide1);
+        mRelativeZaplon2 = findViewById(R.id.relativeZaplon2);
+        mRelativeToSlide2 = findViewById(R.id.relativevToSlide2);
+        proprieteTextView = findViewById(R.id.proprieteTextView);
+        proprieteTextView1 = findViewById(R.id.proprieteTextView1);
+        proprieteTextView2 = findViewById(R.id.proprieteTextView2);
+
+        mRelativeToSlide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isVisible) {
+                    collapse(mRelativeZaplon, 1000, 0);
+                    isVisible = false;
+                } else if (!isVisible) {
+                    expand(mRelativeZaplon, 1000, 200);
+                    isVisible = true;
+                }
+
+            }
+        });
+
+        mRelativeToSlide1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isVisible1) {
+                    collapse(mRelativeZaplon1, 1000, 0);
+                    isVisible1 = false;
+                } else if (!isVisible1) {
+                    expand(mRelativeZaplon1, 1000, 200);
+                    isVisible1 = true;
+                }
+
+            }
+        });
+
+        mRelativeToSlide2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isVisible2) {
+                    collapse(mRelativeZaplon2, 1000, 0);
+                    isVisible2 = false;
+                } else if (!isVisible2) {
+                    expand(mRelativeZaplon2, 1000, 200);
+                    isVisible2 = true;
+                }
+
+            }
+        });
+    }
+
+    private final BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
@@ -103,41 +263,30 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
         }
     };
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Bundle bundle = intent.getExtras();
+            List<UserMotif> userMotifs;
+            userMotifs = (List<UserMotif>) bundle.getSerializable("motifs");
+            Log.i(TAG, "onReceive: " + userMotifs.size());
+            dataIsAvailable = true;
+            waitingForFrameResult = false;
+            if (userMotifs != null)
+                showResultsInBottomSheet(userMotifs);
+        }
+    };
+
     public OpenCVCameraActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "called onCreate");
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_open_c_v_camera);
-        setTitle("Détecter un motif");
-
-        // get the OverlayView responsible for displaying images on top of the camera
-        overlayView = findViewById(R.id.overlay_view);
-        mOpenCvCameraView = findViewById(R.id.opencv_camera_view);
-
-        if (FIXED_FRAME_SIZE) {
-            mOpenCvCameraView.setMaxFrameSize(FRAME_SIZE_WIDTH, FRAME_SIZE_HEIGHT);
-        }
-        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-
-        mOpenCvCameraView.setCvCameraViewListener(this);
-
-        mi = new ActivityManager.MemoryInfo();
-        activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-    }
-
 
     @Override
     public void onPause() {
         super.onPause();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
-
-
         if (toast != null)
             toast.cancel();
     }
@@ -153,6 +302,10 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
             Log.d(TAG, "OpenCV library found inside package. Using it!");
             mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
         }
+
+        IntentFilter mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction("android.intent.action.CustomReciever");
+        registerReceiver(mReceiver, mIntentFilter);
     }
 
     @Override
@@ -174,7 +327,6 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
             long availableMegs = mi.availMem / 1048576L; // 1024 x 1024
             //Percentage can be calculated for API 16+
             //long percentAvail = mi.availMem / mi.totalMem;
-            Log.d(TAG, "available mem: " + availableMegs);
         }
 
         // get the camera frame as gray scale image
@@ -242,17 +394,20 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
                     true
             );
 
-            int numberVertices = (int) approxCurve.total();
             double contourArea = Imgproc.contourArea(cnt);
-
-            Log.d(TAG, "vertices:" + numberVertices);
 
             // ignore to small areas
             if (Math.abs(contourArea) < 100) {
                 continue;
             }
         }
-        getResult(gray);
+
+        if (!waitingForFrameResult) {
+            Bitmap bitmap = Bitmap.createBitmap(gray.cols(), gray.rows(), Bitmap.Config.ARGB_8888);
+            motifBitmap = bitmap;
+            getResult(bitmap);
+            waitingForFrameResult = true;
+        }
         // return the matrix / image to show on the screen
         return dst;
 
@@ -315,26 +470,91 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
         });
     }
 
-    private void getResult(Mat mat) {
-        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
+    private void getResult(Bitmap bitmap) {
+//        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
         byte[] bytes = stream.toByteArray();
         File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-        Log.i(TAG, "onCameraFrame: " + pictureFile.toString());
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(bytes);
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (pictureFile != null) {
+            try {
+                FileOutputStream fos = new FileOutputStream(pictureFile);
+                fos.write(bytes);
 
-        Intent intent = new Intent(OpenCVCameraActivity.this, MotifServiceImpl.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("picture", (Serializable) pictureFile);
-        intent.putExtras(bundle);
-        startService(intent);
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Intent intent = new Intent(OpenCVCameraActivity.this, FindByImageService.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("picture", pictureFile);
+            intent.putExtras(bundle);
+            startService(intent);
+
+            deleteFile(pictureFile.getName());
+        }
+    }
+
+    @UiThread
+    protected void showResultsInBottomSheet(List<UserMotif> results) {
+        int numberOfResults = results.size();
+        if (numberOfResults > 0) {
+            UserMotif userMotif = results.get(0);
+
+            if (userMotif != null) {
+                Picasso.get().load(userMotif.getFileUrl()).into(recognitionImageView);
+                String doubleString = String.valueOf(userMotif.getMotif().getPourcentage());
+                if (userMotif.getMotif().getLibelle() != null)
+                    recognitionTextViewLibelle.setText(userMotif.getMotif().getLibelle() + "(" + doubleString.substring(0, doubleString.indexOf(',') + 3) + "%)");
+                if (userMotif.getMotif().getDescription() != null)
+                    recognitionTextViewDescription.setText(userMotif.getMotif().getDescription());
+                if (userMotif.getMotif().getProprietes() != null && userMotif.getMotif().getProprietes().size() > 0) {
+                    for (Propriete propriete : userMotif.getMotif().getProprietes()) {
+                        String text = propriete.getLibelle() + ": " + propriete.getDescription() + "\n";
+                        proprieteTextView.setText(text);
+                    }
+                }
+            }
+
+            if (numberOfResults > 1) {
+                UserMotif userMotif1 = results.get(1);
+
+                if (userMotif1 != null) {
+                    Picasso.get().load(userMotif.getFileUrl()).into(recognitionImageView1);
+                    String doubleString = String.valueOf(userMotif1.getMotif().getPourcentage());
+                    if (userMotif1.getMotif().getLibelle() != null)
+                        recognitionTextViewLibelle1.setText(userMotif.getMotif().getLibelle() + "(" + doubleString.substring(0, doubleString.indexOf(',') + 3) + "%)");
+                    if (userMotif1.getMotif().getDescription() != null)
+                        recognitionTextViewDescription1.setText(userMotif.getMotif().getDescription());
+                    if (userMotif1.getMotif().getProprietes() != null && userMotif1.getMotif().getProprietes().size() > 0) {
+                        for (Propriete propriete : userMotif1.getMotif().getProprietes()) {
+                            String text = propriete.getLibelle() + ": " + propriete.getDescription() + "\n";
+                            proprieteTextView1.setText(text);
+                        }
+                    }
+                }
+
+                if (numberOfResults > 2) {
+                    UserMotif userMotif2 = results.get(2);
+
+                    if (userMotif2 != null) {
+                        Picasso.get().load(userMotif.getFileUrl()).into(recognitionImageView2);
+                        String doubleString = String.valueOf(userMotif2.getMotif().getPourcentage());
+                        if (userMotif2.getMotif().getLibelle() != null)
+                            recognitionTextViewLibelle2.setText(userMotif2.getMotif().getLibelle() + "(" + doubleString.substring(0, doubleString.indexOf(',') + 3) + "%)");
+                        if (userMotif2.getMotif().getDescription() != null)
+                            recognitionTextViewDescription2.setText(userMotif2.getMotif().getDescription());
+                        if (userMotif2.getMotif().getProprietes() != null && userMotif2.getMotif().getProprietes().size() > 0) {
+                            for (Propriete propriete : userMotif2.getMotif().getProprietes()) {
+                                String text = propriete.getLibelle() + ": " + propriete.getDescription() + "\n";
+                                proprieteTextView2.setText(text);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -378,5 +598,37 @@ public class OpenCVCameraActivity extends AppCompatActivity implements CameraBri
         }
 
         return mediaFile;
+    }
+
+    public static void expand(final View v, int duration, int targetHeight) {
+        int prevHeight = v.getHeight();
+        v.setVisibility(View.VISIBLE);
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(prevHeight, targetHeight);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                v.getLayoutParams().height = (int) animation.getAnimatedValue();
+                v.requestLayout();
+            }
+        });
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.setDuration(duration);
+        valueAnimator.start();
+    }
+
+    public static void collapse(final View v, int duration, int targetHeight) {
+        int prevHeight = v.getHeight();
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(prevHeight, targetHeight);
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                v.getLayoutParams().height = (int) animation.getAnimatedValue();
+                v.requestLayout();
+            }
+        });
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.setDuration(duration);
+        valueAnimator.start();
     }
 }

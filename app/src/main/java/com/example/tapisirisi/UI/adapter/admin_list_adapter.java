@@ -26,7 +26,7 @@ import java.util.List;
 public class admin_list_adapter extends BaseAdapter {
 
     private List<UserMotif> userMotifs;
-    private Context context;
+    private final Context context;
 
     LayoutInflater inflter;
 
@@ -64,15 +64,15 @@ public class admin_list_adapter extends BaseAdapter {
 
         // get the TextView for item name and item description
 
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.image);
+        ImageView imageView = convertView.findViewById(R.id.image);
         Picasso.get().load(userMotifs.get(position).getFileUrl()).into(imageView);
-            Button btnModifier = (Button) convertView.findViewById(R.id.ajouterMotif);
-        Button btnSupprimer = (Button) convertView.findViewById(R.id.supprimerUserMotif);
+            Button btnModifier = convertView.findViewById(R.id.ajouterMotif);
+        Button btnSupprimer = convertView.findViewById(R.id.supprimerUserMotif);
 
 //        btnModifier.setId((int) userMotifs.get(position).getId());
 //        btnSupprimer.setId((int) userMotifs.get(position).getId());
 
-        LinearLayout l = (LinearLayout) convertView.findViewById(R.id.lbtn);
+        LinearLayout l = convertView.findViewById(R.id.lbtn);
         l.setId((int)userMotifs.get(position).getId());
         btnModifier.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -83,7 +83,7 @@ public class admin_list_adapter extends BaseAdapter {
         for (UserMotif um:userMotifs) {
             if (um.getId() == l.getId()){
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("userMotif", (Serializable) userMotifs.get(position));
+                bundle.putSerializable("userMotif", userMotifs.get(position));
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
@@ -110,7 +110,7 @@ class adminViewHolder extends RecyclerView.ViewHolder {
 
     public adminViewHolder(View view) {
         super(view);
-        this.motifImageView = (ImageView) view.findViewById(R.id.image);
+        this.motifImageView = view.findViewById(R.id.image);
 
     }
 }

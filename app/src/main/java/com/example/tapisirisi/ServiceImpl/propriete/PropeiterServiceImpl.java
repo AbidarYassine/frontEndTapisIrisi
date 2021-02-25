@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.tapisirisi.Common.utils.Consts;
 import com.example.tapisirisi.Services.PropreiteService;
 import com.example.tapisirisi.UI.Admin.Ajout_Prop;
 import com.example.tapisirisi.UI.Admin.Ajouter;
@@ -19,7 +20,6 @@ import com.example.tapisirisi.UI.Main.MainActivity;
 import com.example.tapisirisi.UI.Register.CustomPopup;
 import com.example.tapisirisi.UI.Register.CustomSpinner;
 import com.example.tapisirisi.model.Propriete;
-import com.example.tapisirisi.Common.utils.Consts;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class    PropeiterServiceImpl extends Service {
+public class PropeiterServiceImpl extends Service {
     private static PropreiteService propreiteService;
     private static final String TAG = "AddMotifService";
     static Retrofit retrofit;
@@ -55,14 +55,14 @@ public class    PropeiterServiceImpl extends Service {
             public void onResponse(Call<Propriete> call, Response<Propriete> response) {
                 if (response.isSuccessful()) {
                     spinner.dismiss();
-                    Propriete proprieteSaved = (Propriete) response.body();
+                    Propriete proprieteSaved = response.body();
                     Log.i(TAG, "onResponse: " + proprieteSaved.getLibelle());
-                  Intent intent = new Intent(Ajout_Prop.context, MainActivity.class);
-                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    Intent intent = new Intent(Ajout_Prop.context, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    Bundle bundle = new Bundle();
 //                    bundle.putSerializable("value", (Serializable) motifSaved);
 //                    intent.putExtras(bundle);
-                 startActivity(intent);
+                    startActivity(intent);
                 } else {
                     Log.d("resultat requette", "Boo!");
                     return;

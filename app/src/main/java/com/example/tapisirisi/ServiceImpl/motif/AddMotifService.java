@@ -1,4 +1,4 @@
-package com.example.tapisirisi.ServiceImpl.Motif;
+package com.example.tapisirisi.ServiceImpl.motif;
 
 import android.app.ActionBar;
 import android.app.Service;
@@ -11,13 +11,13 @@ import android.view.Window;
 
 import androidx.annotation.Nullable;
 
+import com.example.tapisirisi.Common.utils.Consts;
 import com.example.tapisirisi.Services.MotifService;
 import com.example.tapisirisi.UI.Admin.Ajout_Prop;
 import com.example.tapisirisi.UI.Admin.Ajouter;
 import com.example.tapisirisi.UI.Register.CustomPopup;
 import com.example.tapisirisi.UI.Register.CustomSpinner;
 import com.example.tapisirisi.model.Motif;
-import com.example.tapisirisi.Common.utils.Consts;
 
 import java.io.File;
 import java.io.Serializable;
@@ -63,7 +63,7 @@ public class AddMotifService extends Service {
             public void onResponse(Call<Motif> call, Response<Motif> response) {
                 if (response.isSuccessful()) {
                     spinner.dismiss();
-                    Motif motifSaved = (Motif) response.body();
+                    Motif motifSaved = response.body();
                     Intent intent = new Intent(getApplicationContext(), Ajout_Prop.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Bundle bundle = new Bundle();

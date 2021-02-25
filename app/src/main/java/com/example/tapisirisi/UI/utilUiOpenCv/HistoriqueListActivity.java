@@ -19,7 +19,7 @@ public class HistoriqueListActivity extends AppCompatActivity {
 
     private ListView historiqueListView;
 
-    private static List<Motif> motifs = new ArrayList<Motif>() {{
+    private static final List<Motif> motifs = new ArrayList<Motif>() {{
 //        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));

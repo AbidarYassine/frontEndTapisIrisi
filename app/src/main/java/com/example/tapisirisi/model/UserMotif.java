@@ -7,16 +7,7 @@ public class UserMotif implements Serializable {
     private String image;
     private Motif motif;
     private User user;
-
-    public String getFileUrl() {
-        return fileUrl;
-    }
-
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl;
-    }
-
-    private  String fileUrl;
+    private String fileUrl;
 
     public long getId() {
         return id;
@@ -50,5 +41,11 @@ public class UserMotif implements Serializable {
         this.user = user;
     }
 
+    public String getFileUrl() {
+        return fileUrl;
+    }
 
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class HistoriqueListAdapter extends BaseAdapter {
 
     private List<Motif> motifs;
-    private Context context;
+    private final Context context;
 
     public HistoriqueListAdapter(Context context, List<Motif> motifs) {
         this.context = context;
@@ -52,14 +52,14 @@ public class HistoriqueListAdapter extends BaseAdapter {
         Motif currentMotif = (Motif) getItem(position);
 
         // get the TextView for item name and item description
-        ImageView motifLibelleImageView = (ImageView)
-                convertView.findViewById(R.id.historiqueItemImage);
-        TextView motifTitleTextView = (TextView)
-                convertView.findViewById(R.id.historiqueItemTitle);
+//        ImageView motifLibelleImageView = (ImageView)
+//                convertView.findViewById(R.id.motifImage);
+//        TextView motifTitleTextView = (TextView)
+//                convertView.findViewById(R.id.motifTitle);
 
         //sets the text for item name and item description from the current item object
 //        motifLibelleImageView.setBackgroundResource(currentMotif.getDrawable());
-        motifTitleTextView.setText(currentMotif.getLibelle());
+//        motifTitleTextView.setText(currentMotif.getLibelle());
 
         // returns the view for the current row
         return convertView;
@@ -72,11 +72,13 @@ public class HistoriqueListAdapter extends BaseAdapter {
 
 class ViewHolder extends RecyclerView.ViewHolder {
     public ImageView motifLibelleImageView;
-    public TextView motifTitleTextView;
+    public TextView motifTitleText;
+    public TextView motifDescription;
 
     public ViewHolder(View view) {
         super(view);
-        this.motifLibelleImageView = (ImageView) view.findViewById(R.id.historiqueItemImage);
-        this.motifTitleTextView = (TextView) view.findViewById(R.id.historiqueItemTitle);
+//        this.motifLibelleImageView = (ImageView) view.findViewById(R.id.motifImage);
+//        this.motifTitleText = (TextView) view.findViewById(R.id.motifTitle);
+//        this.motifDescription = (TextView) view.findViewById(R.id.motifDescription);
     }
 }

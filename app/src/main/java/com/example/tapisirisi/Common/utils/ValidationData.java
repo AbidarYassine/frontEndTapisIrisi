@@ -8,10 +8,7 @@ public class ValidationData {
 
 
     public static boolean fieldValidation(String field) {
-        if (TextUtils.isEmpty(field) || field.length() < 6) {
-            return false;
-        }
-        return true;
+        return !TextUtils.isEmpty(field) && field.length() >= 6;
     }
 
 }

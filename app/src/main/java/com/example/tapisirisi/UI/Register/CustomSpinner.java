@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.tapisirisi.R;
 
 public class CustomSpinner extends Dialog {
-    private ProgressBar progressBar;
+    private final ProgressBar progressBar;
 
     public CustomSpinner(@NonNull Context context) {
         super(context);

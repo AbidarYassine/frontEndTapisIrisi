@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 
 import com.example.tapisirisi.R;
-import com.example.tapisirisi.ServiceImpl.Motif.MotifServiceImpl;
+import com.example.tapisirisi.ServiceImpl.motif.MotifServiceImpl;
 import com.example.tapisirisi.UI.adapter.admin_modif_adapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,14 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Modifier extends AppCompatActivity {
-    String libelles[] = {"l1","l2","l3"};
-    String props[] = {"p1","p2,","p3"};
+    String[] libelles = {"l1","l2","l3"};
+    String[] props = {"p1","p2,","p3"};
     Bitmap bitmap;
     private ListView lv;
     private Button modifier;
     private TextView lib;
     ImageView iv;
-    private static List<Propriete> motifs = new ArrayList<Propriete>() {{
+    private static final List<Propriete> motifs = new ArrayList<Propriete>() {{
     }};
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.tapisirisi.ServiceImpl.Motif;
+package com.example.tapisirisi.ServiceImpl.motif;
 
 import android.app.Service;
 import android.content.Intent;
@@ -8,16 +8,14 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.tapisirisi.Common.utils.Consts;
 import com.example.tapisirisi.Services.MotifService;
 import com.example.tapisirisi.Services.PropreiteService;
 import com.example.tapisirisi.UI.Main.MainActivity;
 import com.example.tapisirisi.model.Motif;
 import com.example.tapisirisi.model.UserMotif;
-import com.example.tapisirisi.Common.utils.Consts;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -28,7 +26,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MotifServiceImpl  extends Service {
+public class MotifServiceImpl extends Service {
     private static final String TAG = "MotifSerice";
     static Retrofit retrofit;
     static private MotifService motifService;
@@ -43,7 +41,7 @@ public class MotifServiceImpl  extends Service {
         propreiteService = retrofit.create(PropreiteService.class);
     }
 
-    public void delteMotif( Long id){
+    public void delteMotif(Long id) {
         getClient();
         Call<Motif> call = motifService.delteMotif(id);
         final Motif[] fetchedMotif = {new Motif()};
@@ -68,20 +66,21 @@ public class MotifServiceImpl  extends Service {
             }
         });
     }
-    public  void updateMotif(Motif motif,File file,  Long id){
+
+    public void updateMotif(Motif motif, File file, Long id) {
         getClient();
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-       Log.i("id user motif ",String.valueOf(id));
-       Log.i("mitif id",String.valueOf(motif.getId()) );
-        Call<UserMotif> call = motifService.updateMotif(motif.getId(),motif.getLibelle(),body,id);
+        Log.i("id user motif ", String.valueOf(id));
+        Log.i("mitif id", String.valueOf(motif.getId()));
+        Call<UserMotif> call = motifService.updateMotif(motif.getId(), motif.getLibelle(), body, id);
         Call<Void> call1 = propreiteService.update(motif);
         final UserMotif[] fetchedMotif = {new UserMotif()};
         call1.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
-                    Log.i("info","propriete executed");
+                if (response.isSuccessful()) {
+                    Log.i("info", "propriete executed");
                 }
             }
 
@@ -104,7 +103,7 @@ public class MotifServiceImpl  extends Service {
 //                    Bundle bundle = new Bundle();
 //                    bundle.putSerializable("updatedMotif", (Serializable) fetchedMotif);
 //                    intent.putExtras(bundle);
-                   startActivity(intent);
+                    startActivity(intent);
 
                 } else {
                     Log.d("Yo", "Boo!");
@@ -113,61 +112,9 @@ public class MotifServiceImpl  extends Service {
 
             @Override
             public void onFailure(Call<UserMotif> call, Throwable t) {
-              Log.i("info",t.getMessage());
-            }
-
-        });
-    }
-    public void findByImage(File file) {
-        getClient();
-        Log.i("Moitf info","/////////////////////////");
-        final List returnedMotifs = new ArrayList();
-
-        // create RequestBody instance from file
-        RequestBody requestFile =
-                RequestBody.create(
-                        MediaType.parse("image/jpg"),
-                        file
-                );
-
-        // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-
-        // add another part within the multipart request
-        String descriptionString = "hello, this is description speaking";
-        RequestBody description =
-                RequestBody.create(
-                        okhttp3.MultipartBody.FORM, descriptionString);
-
-        // finally, execute the request
-        Call<List> call = motifService.findByImage(description, body);
-
-        call.enqueue(new Callback<List>() {
-            @Override
-            public void onResponse(Call<List> call, Response<List> response) {
-                if (response.isSuccessful()) {
-                    List motifs = response.body();
-//                    Intent intent = new Intent(getApplicationContext(), Admin.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("value", (Serializable) motifs);
-//                    intent.putExtras(bundle);
-//                    startActivity(intent);
-
-                    Log.i("resultat requette", motifs.toString());
-                    returnedMotifs.addAll(motifs);
-                } else {
-                    Log.d("resultat requette", "Boo!");
-                    return;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List> call, Throwable t) {
                 Log.i("info", t.getMessage());
-
             }
+
         });
     }
 
@@ -175,10 +122,10 @@ public class MotifServiceImpl  extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 //        File picture = (File) intent.getExtras().get("picture");
         Bundle bundle = intent.getExtras();
-        Motif m = (Motif)  bundle.getSerializable("updatedMotif");
+        Motif m = (Motif) bundle.getSerializable("updatedMotif");
         File file = (File) bundle.getSerializable("picture");
         long idUserMotif = (long) bundle.getLong("idUserMotif");
-        updateMotif( m,file,idUserMotif);
+        updateMotif(m, file, idUserMotif);
         Log.d("resultat requette 11111", "Boo!");
         return START_NOT_STICKY;
     }

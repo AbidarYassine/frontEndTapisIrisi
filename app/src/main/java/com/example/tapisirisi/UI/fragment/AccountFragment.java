@@ -40,7 +40,7 @@ public class AccountFragment extends Fragment {
         databaseHelper = new DatabaseHelper(getContext());
         User user;
         user = databaseHelper.getCurrentUser();
-        Log.i("info", user.getLogin().toString());
+        Log.i("info", user.getLogin());
         nom = rootView.findViewById(R.id.nom);
         prenom = rootView.findViewById(R.id.prenom);
         login = rootView.findViewById(R.id.login);

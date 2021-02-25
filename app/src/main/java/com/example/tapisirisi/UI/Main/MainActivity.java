@@ -13,10 +13,10 @@ import com.example.tapisirisi.UI.fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = "MainActivity";
     BottomNavigationView buttom_navigation;
     private Context context;
+
     public Context getContext() {
         Context applicationContext = getApplicationContext();
         return applicationContext;

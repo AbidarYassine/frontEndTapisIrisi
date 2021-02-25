@@ -29,7 +29,7 @@ public class UserMotifServiceImpl extends Service {
             .baseUrl(Consts.API)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
-    static private UserMotifService userMotifService = retrofit.create(UserMotifService.class);
+    static private final UserMotifService userMotifService = retrofit.create(UserMotifService.class);
 
     public void getAllUserMotifs(Long id) {
         Call<List<UserMotif>> call = userMotifService.getAllUserMotif(id);
@@ -58,7 +58,6 @@ public class UserMotifServiceImpl extends Service {
                 Log.i("TAGerr", t.getMessage());
             }
         });
-
     }
 
     @Nullable

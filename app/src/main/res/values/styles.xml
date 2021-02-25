@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<style name="connexion">
 
-    <item name="android:textSize">
-        50sp
-    </item>
+    <style name="connexion">
 
-    <item name="android:textColor">
-        #4F80D8
-    </item>
+        <item name="android:textSize">
+            50sp
+        </item>
 
-</style>
+        <item name="android:textColor">
+            #4F80D8
+        </item>
+
+    </style>
+
     <style name="login">
 
         <item name="android:textSize">
@@ -33,5 +35,11 @@
             #4F80D8
         </item>
 
+    </style>
+
+    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 </resources>

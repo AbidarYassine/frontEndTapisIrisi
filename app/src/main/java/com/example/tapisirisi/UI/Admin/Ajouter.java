@@ -16,7 +16,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapisirisi.R;
-import com.example.tapisirisi.ServiceImpl.Motif.AddMotifService;
+import com.example.tapisirisi.ServiceImpl.motif.AddMotifService;
 import com.example.tapisirisi.UI.Register.CustomPopup;
 import com.example.tapisirisi.UI.Register.CustomSpinner;
 import com.example.tapisirisi.UI.utilUiOpenCv.OpenCVCameraActivity;
@@ -27,7 +27,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class Ajouter extends AppCompatActivity {
     CustomSpinner spinner;
     public static Context context;
     CustomPopup popup;
-    private static List<Motif> motifs = new ArrayList<Motif>() {{
+    private static final List<Motif> motifs = new ArrayList<Motif>() {{
 //        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));
@@ -86,7 +85,7 @@ public class Ajouter extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("description", description.getText().toString());
                     bundle.putString("libelle", libelle_motif.getText().toString());
-                    bundle.putSerializable("picture", (Serializable) pictureFile);
+                    bundle.putSerializable("picture", pictureFile);
                     intent.putExtras(bundle);
                     startService(intent);
                 }

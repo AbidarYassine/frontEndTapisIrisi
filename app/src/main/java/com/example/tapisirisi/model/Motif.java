@@ -7,15 +7,7 @@ public class Motif implements Serializable {
     private long id;
     private String libelle;
     private String description;
-
-    public List<Propriete> getProprietes() {
-        return proprietes;
-    }
-
-    public void setProprietes(List<Propriete> proprietes) {
-        this.proprietes = proprietes;
-    }
-
+    private double pourcentage;
     private List<Propriete> proprietes;
 
     public Motif() {
@@ -35,6 +27,7 @@ public class Motif implements Serializable {
         this.libelle = libelle;
         this.description = description;
     }
+
 
     public long getId() {
         return id;
@@ -61,4 +54,19 @@ public class Motif implements Serializable {
         this.description = description;
     }
 
+    public double getPourcentage() {
+        return pourcentage;
+    }
+
+    public void setPourcentage(double pourcentage) {
+        this.pourcentage = pourcentage;
+    }
+
+    public List<Propriete> getProprietes() {
+        return proprietes;
+    }
+
+    public void setProprietes(List<Propriete> proprietes) {
+        this.proprietes = proprietes;
+    }
 }

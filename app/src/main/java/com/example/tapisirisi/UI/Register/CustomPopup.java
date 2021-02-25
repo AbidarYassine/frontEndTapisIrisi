@@ -13,8 +13,9 @@ public class CustomPopup extends Dialog {
     //files
     private String title;
     private String content;
-    private Button button;
-    private TextView titleView, contentView;
+    private final Button button;
+    private final TextView titleView;
+    private final TextView contentView;
 
     // constructor
     public CustomPopup(@NonNull Context context) {

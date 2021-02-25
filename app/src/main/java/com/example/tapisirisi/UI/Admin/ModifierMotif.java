@@ -15,7 +15,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapisirisi.R;
-import com.example.tapisirisi.ServiceImpl.Motif.MotifServiceImpl;
+import com.example.tapisirisi.ServiceImpl.motif.MotifServiceImpl;
 import com.example.tapisirisi.UI.utilUiOpenCv.OpenCVCameraActivity;
 import com.example.tapisirisi.UI.adapter.admin_modif_adapter;
 import com.example.tapisirisi.model.Motif;

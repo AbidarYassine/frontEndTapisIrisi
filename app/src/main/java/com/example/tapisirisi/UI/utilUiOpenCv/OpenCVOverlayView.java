@@ -41,7 +41,7 @@ public class OpenCVOverlayView extends View {
     /**
      * the context
      */
-    private Context mContext;
+    private final Context mContext;
     /**
      * the sound of a bear
      */

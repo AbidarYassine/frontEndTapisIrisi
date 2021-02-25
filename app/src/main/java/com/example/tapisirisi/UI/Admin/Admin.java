@@ -20,7 +20,7 @@ import java.util.List;
 public class Admin extends AppCompatActivity {
     private ListView lv;
    private Button ajouterMotif;
-    private static List<Motif> motifs = new ArrayList<Motif>() {{
+    private static final List<Motif> motifs = new ArrayList<Motif>() {{
 //        add(new Motif(1, R.drawable.ic_launcher_background, "test1"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test2"));
 //        add(new Motif(2, R.drawable.ic_launcher_background, "test3"));

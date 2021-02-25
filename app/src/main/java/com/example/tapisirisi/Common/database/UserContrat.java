@@ -3,7 +3,8 @@ package com.example.tapisirisi.Common.database;
 import android.provider.BaseColumns;
 
 public class UserContrat {
-    private UserContrat(){};
+    private UserContrat(){}
+
     public static class UserTable implements BaseColumns {
         public static final String ID_USER = "ID_USER";
         public static final String TABLE_NAME = "USER";
