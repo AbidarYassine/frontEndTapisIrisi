@@ -49,7 +49,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="1dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
 
         <Button
             android:id="@+id/button_start_camera"
-            android:layout_width="wrap_content"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="50dp"
@@ -83,6 +83,20 @@
             android:text="@string/chercher"
             android:textColor="#FFF"
             android:visibility="gone" />
+
+        <Button
+            android:id="@+id/goToAdmin"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_btn"
+            android:text="Espce Admin"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <View
@@ -95,15 +109,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/goToAdmin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="56dp"
-        android:text="ADMIN"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/vector" />
 
 
     <!-- drawable/vector.xml -->

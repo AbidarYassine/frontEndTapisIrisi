@@ -23,6 +23,8 @@ import com.example.tapisirisi.Common.database.DatabaseHelper;
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.ServiceImpl.UserMotif.UserMotifServiceImpl;
 import com.example.tapisirisi.UI.utilUiOpenCv.OpenCVCameraActivity;
+import com.example.tapisirisi.model.Role;
+import com.example.tapisirisi.model.User;
 
 
 public class HomeFragment extends Fragment {
@@ -31,7 +33,7 @@ public class HomeFragment extends Fragment {
     FrameLayout frameLayout;
     ImageView image_capturer;
     View rootView;
-
+    DatabaseHelper databaseHelper;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,8 +44,11 @@ public class HomeFragment extends Fragment {
         chercher = rootView.findViewById(R.id.chercher);
         frameLayout = getActivity().findViewById(R.id.fragment_content);
         admin = rootView.findViewById(R.id.goToAdmin);
-
-
+         databaseHelper = new DatabaseHelper(getContext());
+         User user = databaseHelper.getCurrentUser();
+        if(user.getRole().equals(Role.ADMIN)){
+            admin.setVisibility(View.VISIBLE);
+        }
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

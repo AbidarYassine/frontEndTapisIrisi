@@ -41,15 +41,8 @@ public class Login extends AppCompatActivity {
 
         if (user != null) {
             Log.i("TAG", "onCreate: user id" + user.getRole());
-            if (user.getRole().equals(Role.ADMIN)) {
-                Intent i = new Intent(Login.this, UserMotifServiceImpl.class);
-                Long id = user.getId();
-                i.putExtra("idUser", String.valueOf(id));
-                Login.this.startService(i);
-            } else {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-            }
         } else {
 
             btn = findViewById(R.id.loginButton);

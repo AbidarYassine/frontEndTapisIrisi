@@ -25,6 +25,7 @@
     <string name="prenom">Prenom</string>
     <string name="image">Image</string>
     <string name="logout">Logout</string>
+    <string name="Apropos">A propos</string>
     <string name="Password">Mot de passe actuel</string>
     <string name="newpassword">Nouveau Mot de passe</string>
     <string name="confirm">Confirmation Mot de passe</string>
