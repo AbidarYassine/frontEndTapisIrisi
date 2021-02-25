@@ -40,32 +40,6 @@ public class MotifServiceImpl extends Service {
         propreiteService = retrofit.create(PropreiteService.class);
     }
 
-    public void delteMotif(Long id) {
-        getClient();
-        Call<Motif> call = motifService.delteMotif(id);
-        final Motif[] fetchedMotif = {new Motif()};
-        call.enqueue(new Callback<Motif>() {
-            @Override
-            public void onResponse(Call<Motif> call, Response<Motif> response) {
-                Log.i(TAG, "updateMotif: " + response.body());
-                if (response.isSuccessful()) {
-                    Motif motif1 = response.body();
-                    Log.i("DELETE", motif1.getDescription());
-                    Intent intent = new Intent(getApplicationContext(), MotifServiceImpl.class);
-                    startService(intent);
-
-                } else {
-                    Log.d("Yo", "Boo!");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Motif> call, Throwable t) {
-
-            }
-        });
-    }
-
     public void updateMotif(Motif motif, File file, Long id) {
         getClient();
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);

@@ -2,6 +2,7 @@
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +23,7 @@ import com.example.tapisirisi.model.Motif;
 import com.example.tapisirisi.model.Propriete;
 import com.example.tapisirisi.model.UserMotif;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -95,7 +97,37 @@ import java.util.List;
                     bundle.putSerializable("picture", (Serializable) pictureFile);
                     bundle.putLong("idUserMotif",userMotif.getId());
                 }else  {
-                    
+                    Picasso.get().load(userMotif.getFileUrl()).into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap1, Picasso.LoadedFrom from) {
+                            // Set it in the ImageView
+                            bitmap = bitmap1;
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+                            byte[] bytes = stream.toByteArray();
+                            File pictureFile = OpenCVCameraActivity.getOutputMediaFile(OpenCVCameraActivity.MEDIA_TYPE_IMAGE);
+                            Log.i("TAG", "onCameraFrame: " + pictureFile.toString());
+                            try {
+                                FileOutputStream fos = new FileOutputStream(pictureFile);
+                                fos.write(bytes);
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            bundle.putSerializable("picture", (Serializable) pictureFile);
+                            bundle.putLong("idUserMotif",userMotif.getId());
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
                 }
                  Intent intent = new Intent(getApplicationContext(), MotifServiceImpl.class);
                 m.setProprietes(proprietes);

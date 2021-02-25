@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tapisirisi.R;
+import com.example.tapisirisi.ServiceImpl.Motif.SupprimerMotif;
 import com.example.tapisirisi.UI.Admin.ModifierMotif;
 import com.example.tapisirisi.model.Motif;
 import com.example.tapisirisi.model.UserMotif;
@@ -68,10 +69,14 @@ public class admin_list_adapter extends BaseAdapter {
         Picasso.get().load(userMotifs.get(position).getFileUrl()).into(imageView);
             Button btnModifier = convertView.findViewById(R.id.ajouterMotif);
         Button btnSupprimer = convertView.findViewById(R.id.supprimerUserMotif);
-
-//        btnModifier.setId((int) userMotifs.get(position).getId());
-//        btnSupprimer.setId((int) userMotifs.get(position).getId());
-
+        btnSupprimer.setOnClickListener(v -> {
+            Intent intent = new Intent(context, SupprimerMotif.class);
+            Bundle bundle1 =  new Bundle();
+            Log.i("abdelati hhh",String.valueOf(userMotifs.get(position).getMotif().getId()));
+            bundle1.putLong("idMotif",userMotifs.get(position).getMotif().getId());
+            intent.putExtras(bundle1);
+            context.startService(intent);
+        });
         LinearLayout l = convertView.findViewById(R.id.lbtn);
         l.setId((int)userMotifs.get(position).getId());
         btnModifier.setOnClickListener(new View.OnClickListener() {

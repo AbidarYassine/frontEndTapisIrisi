@@ -9,6 +9,7 @@ import android.view.Window;
 
 import com.example.tapisirisi.ServiceImpl.UserMotif.UserMotifServiceImpl;
 import com.example.tapisirisi.Services.UserService;
+import com.example.tapisirisi.UI.Main.MainActivity;
 import com.example.tapisirisi.UI.Register.CustomPopup;
 import com.example.tapisirisi.UI.Register.CustomSpinner;
 import com.example.tapisirisi.Common.database.DatabaseHelper;
@@ -148,11 +149,10 @@ public class UserServiceImpl {
                     } else {
                        // context.startActivity(intent);
                         spinner.dismiss();
-                       databaseHelper.insertUser(fetchedUser[0]);
+                        databaseHelper.insertUser(fetchedUser[0]);
                      //context.startActivity(intent);
-                        Intent i = new Intent(context, UserMotifServiceImpl.class);
-                        i.putExtra("idUser", databaseHelper.getCurrentUser().getId());
-                        context.startService(i);
+                        Intent i = new Intent(context, MainActivity.class);
+                        context.startActivity(i);
 
                     }
 

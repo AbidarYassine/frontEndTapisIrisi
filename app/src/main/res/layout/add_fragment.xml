@@ -3,17 +3,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:padding="26dp">
 
     <TextView
-        android:id="@+id/textView_home"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/textView10"
+        android:layout_width="225dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="16dp"
+        android:text="A propos de nous"
+        android:textColor="#6C63FF"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="349dp"
+            android:layout_height="249dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/question" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:elegantTextHeight="true"
+                android:freezesText="true"
+                android:text="RecoTa . Une application qu'on a conçu qui va bouleverser le  monde de l'artisanat et ceci est dû à plusieurs raisons . tapis maroc représente va demeurer un accompagnant pour les touristes qui s'intéressent à l'artisanat car ils n'auront plus besoin de chercher de demander de l'aide pour avoir des informations sur les tapis  , il suffit d'ouvrir l'application , placer la caméra devant le tapis et puis voilà vous avez tout les informations sur tapis . Une solution informatique facile à utiliser et efficiente"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+        </ScrollView>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

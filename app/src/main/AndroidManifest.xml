@@ -37,10 +37,13 @@
         android:theme="@style/Theme.TapisIrisi"
         android:usesCleartextTraffic="true">
         <service
-            android:name=".ServiceImpl.propriete.deleteProprieteServiceImpl"
+            android:name=".ServiceImpl.Motif.SupprimerMotif"
             android:enabled="true"
             android:exported="true"></service>
-
+        <service
+            android:name=".ServiceImpl.propriete.deleteProprieteServiceImpl"
+            android:enabled="true"
+            android:exported="true" />
         <service
             android:name=".ServiceImpl.UserMotif.UserMotifServiceImpl"
             android:enabled="true"

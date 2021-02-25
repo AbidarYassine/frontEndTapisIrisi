@@ -44,6 +44,7 @@ public class Modifier extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_modif);
+        this.getSupportActionBar().hide();
         Log.i("info","onCreateModifier");
         ListView lv = findViewById(R.id.propModidlv);
         this.getSupportActionBar().hide();

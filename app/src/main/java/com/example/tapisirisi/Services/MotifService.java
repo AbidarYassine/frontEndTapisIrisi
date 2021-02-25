@@ -21,6 +21,6 @@ public interface MotifService {
     @POST("motif/update/")
     Call<UserMotif> updateMotif(@Query("idMotif") long idMotif, @Query("libelle") String libelle, @Part MultipartBody.Part file, @Query("idUserMotif") long id);
 
-    @DELETE("/delete/{id}")
-    Call<Motif> delteMotif(@Path("id") long id);
+    @DELETE("motif/delete/{id}")
+    Call<Void> delteMotif(@Path("id") long id);
 }
