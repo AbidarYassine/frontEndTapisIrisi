@@ -63,6 +63,7 @@
         app:suffixTextColor="@color/purple_500">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/loginIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
@@ -101,6 +102,7 @@
         app:suffixTextColor="@color/purple_500">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"
@@ -125,6 +127,7 @@
         app:suffixTextColor="@color/purple_500">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirmPasswordIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFFFFF"

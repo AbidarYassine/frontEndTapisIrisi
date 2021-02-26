@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
     private Button btn;
     CustomPopup popup;
     CustomSpinner spinner;
-    private TextView textView;
+    private TextView textView,forgettenPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,11 @@ public class Login extends AppCompatActivity {
             btn = findViewById(R.id.loginButton);
             login = findViewById(R.id.loginInput);
             password = findViewById(R.id.passwordInput);
+            forgettenPass= findViewById(R.id.forgettenPass);
+            forgettenPass.setOnClickListener(v -> {
+                Intent intent = new Intent(this,Register.class);
+                startActivity(intent);
+            });
             textView = findViewById(R.id.forgettenPass);
             popup = new CustomPopup(this);
             spinner = new CustomSpinner(this);

@@ -62,6 +62,7 @@ public class UserServiceImpl {
 
     public static User register(User user, CustomSpinner spinner, CustomPopup popup, Context context) {
         getClient();
+        DatabaseHelper databaseHelper = new DatabaseHelper(context);
         Call<User> call = userService.register(user);
         final User[] fetchedUser = new User[1];
         spinner.show();
@@ -81,7 +82,9 @@ public class UserServiceImpl {
                         popup.build();
                     } else {
                         // rediriger vers l'espace utilisateur
-
+                        databaseHelper.insertUser(fetchedUser[0]);
+                        Intent i = new Intent(context, MainActivity.class);
+                        context.startActivity(i);
                     }
 
                 }

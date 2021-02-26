@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.tapisirisi.R;
 import com.example.tapisirisi.ServiceImpl.User.UserServiceImpl;
+import com.example.tapisirisi.model.Role;
 import com.example.tapisirisi.model.User;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -22,10 +23,10 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getSupportActionBar().hide();
         setContentView(R.layout.register);
-        login = findViewById(R.id.loginInput);
-        register = findViewById(R.id.loginButton);
-        password = findViewById(R.id.password);
-        cPassword = findViewById(R.id.confirmPasswordInput);
+        login = findViewById(R.id.loginIn);
+        register = findViewById(R.id.save);
+        password = findViewById(R.id.passwordInput);
+        cPassword = findViewById(R.id.confirmPasswordIn);
         popup = new CustomPopup(this);
         popup.getButton().setOnClickListener(v1 -> {
             popup.dismiss();
@@ -45,6 +46,7 @@ public class Register extends AppCompatActivity {
                 showPopup("Ouups", "mot de passe et mot de passe de confirmation sont différents");
             } else {
                 User user = new User(loginValue, passwordValue);
+                user.setRole(Role.USER);
                 UserServiceImpl.register(user, spinner, popup, this);
             }
 
